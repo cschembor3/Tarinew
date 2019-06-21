@@ -1,0 +1,29 @@
+.placesBtn {
+    font-size: 18px;
+    color: black;
+    padding: 12px;
+}
+
+.placesDropdown {
+    display: inline-block;
+}
+
+.places {
+    display: none;
+    background-color: #e6d4d4;
+}
+
+.places a:hover {
+    background-color: #a1234a;
+}
+
+.places a {
+    display: block;
+    padding: 12px 12px;
+    color: black;
+    text-decoration: none;
+}
+
+.placesDropdown:hover .places {
+    display: block;
+}
