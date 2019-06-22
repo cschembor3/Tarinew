@@ -1,29 +1,37 @@
-.placesBtn {
+.placesBtn, .playersBtn {
     font-size: 18px;
     color: black;
     padding: 12px;
 }
 
-.placesDropdown {
-    display: inline-block;
+.placesDropdown, .majorPlayersDropdown {
+    display: flex;
+    flex-direction: column;
+    width: 256px;
 }
 
-.places {
+.places, .players {
     display: none;
     background-color: #e6d4d4;
 }
 
-.places a:hover {
-    background-color: #a1234a;
+.places a:hover, .players a:hover {
+    background-color: darkgrey;
 }
 
-.places a {
+.places a, .players a {
     display: block;
     padding: 12px 12px;
     color: black;
     text-decoration: none;
 }
 
-.placesDropdown:hover .places {
-    display: block;
+.placesDropdown:hover .places, .majorPlayersDropdown:hover .players {
+    display: inline;
+}
+
+nav {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
 }
