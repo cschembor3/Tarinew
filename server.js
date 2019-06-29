@@ -23,6 +23,7 @@ app.post('/', async function (req, res) {
       const dbReq = await client.query('INSERT INTO character_info_table (id, name, race, class, level',
         [2, characterName, characterRace, characterClass, characterLevel], (error, response) => {
           if (error) {
+            console.log(error);
             throw error;
           }
           response.status(201).send('User created!');
