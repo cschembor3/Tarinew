@@ -22,7 +22,9 @@ app.post('/', async function (req, res) {
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM character_info_table');
       const results = { 'results': (result) ? result.rows : null};
-      res.render('/', results );
+      res.json({
+        response: results
+      });
       client.release();
     } catch (err) {
       console.error(err);
