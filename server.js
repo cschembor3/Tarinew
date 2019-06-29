@@ -9,7 +9,7 @@ const pool = new Pool({
   ssl: true
 });
 
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
