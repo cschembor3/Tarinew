@@ -9,6 +9,8 @@ const pool = new Pool({
   ssl: true
 });
 
+const port = process.env.port || 8080;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/', async function (req, res) {
@@ -28,4 +30,4 @@ app.post('/', async function (req, res) {
     }
 });
 
-http.createServer(app).listen();
+http.createServer(app).listen(port);
