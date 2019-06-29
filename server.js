@@ -11,15 +11,21 @@ const pool = new Pool({
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/', function (req, res) {
+app.post('/', async function (req, res) {
     let characterName = req.body.characterName;
     let characterRace = req.body.characterRace;
     let characterClass = req.body.characterClass;
     let characterLevel = req.body.characterLevel;
-    res.send("Character name: " + characterName + "\n" +
-             "Character race: " + characterRace + "\n" +
-             "Character class: " + characterClass + "\n" +
-             "Character level: " + characterLevel + "\n");
+    try {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM character_info_table');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
 });
 
-http.createServer(app).listen(12345);
+http.createServer(app).listen(443);
