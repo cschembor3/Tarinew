@@ -19,14 +19,12 @@ app.post('/', async function (req, res) {
     let characterClass = req.body.characterClass;
     let characterLevel = req.body.characterLevel;
     try {
-      const client = await pool.connect()
+      const client = await pool.connect();
       const dbReq = await client.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
         [2, characterName, characterRace, characterClass, characterLevel], (error, response) => {
           if (error) {
-            console.log(error);
             throw error;
           }
-          response.status(201).send('User created!');
         });
       const result = await client.query('SELECT * FROM character_info_table');
       const results = { 'results': (result) ? result.rows : null};
