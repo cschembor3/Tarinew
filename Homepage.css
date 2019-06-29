@@ -1,32 +1,32 @@
-.placesBtn, .playersBtn {
+.dropdownBtn {
     font-size: 18px;
     color: black;
     padding: 12px;
 }
 
-.placesDropdown, .majorPlayersDropdown {
+.dropdown {
     display: flex;
     flex-direction: column;
-    width: 256px;
+    width: 100%;
 }
 
-.places, .players {
+.dropdownLinks {
     display: none;
     background-color: #e6d4d4;
 }
 
-.places a:hover, .players a:hover {
+.dropdownLinks a:hover {
     background-color: darkgrey;
 }
 
-.places a, .players a {
+.dropdownLinks a {
     display: block;
     padding: 12px 12px;
     color: black;
     text-decoration: none;
 }
 
-.placesDropdown:hover .places, .majorPlayersDropdown:hover .players {
+.dropdown:hover .dropdownLinks {
     display: inline;
 }
 
@@ -34,4 +34,5 @@ nav {
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    width: 100%;
 }

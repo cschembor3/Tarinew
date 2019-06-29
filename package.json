@@ -1,0 +1,28 @@
+{
+  "name": "dndwebsite",
+  "version": "1.0.0",
+  "description": "Wiki/player information site for my dnd campaign",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cschembor3/Tarinew.git"
+  },
+  "keywords": [
+    "dnd"
+  ],
+  "author": "Connor Schembor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cschembor3/Tarinew/issues"
+  },
+  "homepage": "https://github.com/cschembor3/Tarinew#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "pg": "^7.11.0",
+    "utils": "^0.3.1"
+  }
+}

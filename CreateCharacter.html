@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <h1>Add a character page for your player character.</h1>
+    </head>
+    <body>
+        <form action="http://localhost:12345/" method="POST">
+            Character Name:<br>
+            <input type="text" name="characterName">
+            <br>Character Race:
+            <select name="characterRace">
+                <option value="Other" checked>Other</option>
+                <option value="Dragonborn">Dragonborn</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Elf">Elf</option>
+                <option value="Gnome">Gnome</option>
+                <option value="Half-Elf">Half-Elf</option>
+                <option value="Halfling">Halfling</option>
+                <option value="Half-Orc">Half-Orc</option>
+                <option value="Human">Human</option>
+                <option value="Tiefling">Tiefling</option>
+            </select> 
+            <br>Character Class:<br>
+            <input type="checkbox" name="characterClass" value="Bard"> Bard<br>
+                <input type="checkbox" name="characterClass" value="Cleric"> Cleric<br>
+            Character Level:<br>
+            <input type="number" name="characterLevel" min="1" max="15">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
