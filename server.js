@@ -20,6 +20,7 @@ app.post('/', async function (req, res) {
     let characterLevel = req.body.characterLevel;
     try {
       const client = await pool.connect()
+      const dbReq = await pool.post(req);
       const result = await client.query('SELECT * FROM character_info_table');
       const results = { 'results': (result) ? result.rows : null};
       res.json({
