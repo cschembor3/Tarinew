@@ -20,7 +20,7 @@ app.post('/', async function (req, res) {
     let characterLevel = req.body.characterLevel;
     try {
       const client = await pool.connect()
-      const dbReq = await client.query('INSERT INTO character_info_table (id, name, race, class, level',
+      const dbReq = await client.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
         [2, characterName, characterRace, characterClass, characterLevel], (error, response) => {
           if (error) {
             console.log(error);
