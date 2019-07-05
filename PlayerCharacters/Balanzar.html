@@ -1,0 +1,14 @@
+<h1>Balanzar</h1>
+
+<script type="text/javascript">
+    const url = 'https://boiling-sea-30343.herokuapp.com'
+    $.get(
+        '${url}/players/Balanzar',
+        function(data) {
+            document.getElementById('level').innerText = data.name;
+    });
+</script>
+
+<h3><b>Race:</b> Dragonborn</h3>
+<h3><b>Class:</b> Rogue</h3>
+<h3 id="level"><b>Level:</b> 3</h3>
