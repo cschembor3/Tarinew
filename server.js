@@ -52,29 +52,23 @@ app.post('/', async function (req, res, next) {
  * Gets the character information for the given id
  */
 app.get('/players/:playerId', async function(req, res, next) {
-  try {
-    const client = await pool.connect();
-    const playerId = req.params.playerId;
-    const characterInfoResp = await client.query(
-      'SELECT * FROM character_info_table WHERE name = $1',
-      [playerId],
-      (error, response) => {
-        if (error) {
-          console.log(error);
-          throw error;
-        }
-      });
+  const client = await pool.connect();
+  const playerId = req.params.playerId;
+  const characterInfoResp = await client.query(
+    'SELECT * FROM character_info_table WHERE name = $1',
+    [playerId],
+    (error, response) => {
+      if (error) {
+        console.log(error);
+        res.send('Error: ' + error);
+      }
 
-    const characterInfoResult = { 'results'
-      : (characterInfoResp)
-      ? characterInfoResp.rows : null};
-    res.json({
-      response: characterInfoResult
-    })
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
+      res.json({
+        'response': response
+        ? response.rows
+        : null
+      });
+    });
 });
 
 http.createServer(app).listen(port);
