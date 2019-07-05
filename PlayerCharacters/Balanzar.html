@@ -6,7 +6,9 @@
         $.get(
             'https://boiling-sea-30343.herokuapp.com/players/Balanzar',
             function(data) {
-                const playerObj = JSON.parse(data.body).response;
+                data = JSON.stringify(data);
+                console.log(data);
+                const playerObj = JSON.parse(data).response;
                 document.getElementById('level').append(playerObj.level);
         });
     </script>
