@@ -6,14 +6,15 @@
         $.get(
             'https://boiling-sea-30343.herokuapp.com/players/Balanzar',
             function(data) {
-                document.getElementById('level').innerText = data.name;
+                const playerObj = JSON.parse(data.body).response;
+                document.getElementById('level').append(playerObj.level);
         });
     </script>
 
     <h1>Balanzar</h1>
-    <h3><b>Race:</b> Dragonborn</h3>
-    <h3><b>Class:</b> Rogue</h3>
-    <h3 id="level"><b>Level:</b></h3>
+    <h3>Race: Dragonborn</h3>
+    <h3>Class: Rogue</h3>
+    <h3 id="level">Level: </h3>
     
     
 </html>
