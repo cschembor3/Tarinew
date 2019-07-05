@@ -65,7 +65,7 @@ app.get('/players/:playerId', async function(req, res, next) {
 
       res.json({
         'response': response
-        ? response.rows
+        ? response.rows[0]
         : null
       });
     });
