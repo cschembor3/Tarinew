@@ -56,7 +56,7 @@ app.get('/players/:playerId', async function(req, res, next) {
     const client = await pool.connect();
     const playerId = req.param('playerId');
     const characterInfoResp = await client.query(
-      'SELECT * FROM character_info_table WHERE name = \'$1\'', [playerId]);
+      'SELECT * FROM character_info_table WHERE name = \'(name)\' VALUES ($1)', [playerId]);
     const characterInfoResult = { 'results'
       : (characterInfoResp)
       ? characterInfoResp.rows : null};
