@@ -13,10 +13,17 @@ const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 /*
  * Inserts the character information into the database
  */
-app.post('/', async function (req, res) {
+app.post('/', async function (req, res, next) {
   let characterName = req.body.characterName;
   let characterRace = req.body.characterRace;
   let characterClass = req.body.characterClass;
@@ -44,12 +51,12 @@ app.post('/', async function (req, res) {
 /*
  * Gets the character information for the given id
  */
-app.get('/players/:playerId', async function(req, res) {
+app.get('/players/:playerId', async function(req, res, next) {
   try {
     const client = await pool.connect();
     const playerId = req.param('playerId');
     const characterInfoResp = await client.query(
-      'SELECT * FROM character_info_table WHERE name == $1', [playerId]);
+      'SELECT * FROM character_info_table WHERE name = \'$1\'', [playerId]);
     const characterInfoResult = { 'results'
       : (characterInfoResp)
       ? characterInfoResp.rows : null};
