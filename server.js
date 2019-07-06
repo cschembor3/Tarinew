@@ -83,11 +83,6 @@ app.get('/players/:playerId', async function(req, res, next) {
         playerSpells = response;
       });
       */
-
-    res.json({
-      'player': playerInfo,
-      //'spells': playerSpells
-    });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
