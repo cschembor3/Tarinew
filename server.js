@@ -56,8 +56,8 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   try {
     await client.query(
-      'SELECT character_info_table.name, character_info_table.level, spells.spellName, spells.description, spells.spellLevel ' +
-      'FROM character_info_table, spells ' +
+      'SELECT spells.spellName, spells.description, spells.spellLevel ' +
+      'FROM spells ' +
       'WHERE spells.characterName = $1;',
       [playerId],
       (error, response) => {
