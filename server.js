@@ -54,25 +54,28 @@ app.post('/', async function (req, res, next) {
 app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
-  await client.query(
-    'SELECT character_info_table.name, character_info_table.level, spells.spellName, spells.description, spells.spellLevel ' +
-    'FROM character_info_table, spells ' +
-    'WHERE character_info_table.name = $1 AND spells.characterName = $1;',
-    [playerId],
-    (error, response) => {
-      if (error) {
-        console.log(error);
-        res.send('Error: ' + error);
-      }
+  try {
+    await client.query(
+      'SELECT character_info_table.name ' +
+      'FROM character_info_table, spells ' +
+      'WHERE character_info_table.name = $1 AND spells.characterName = $1;',
+      [playerId],
+      (error, response) => {
+        if (error) {
+          console.log(error);
+          res.send('Error: ' + error);
+        }
 
-      console.log(response);
-
-      res.json({
-        'response': response
-        ? response.rows[0]
-        : null
+        res.json({
+          'response': response
+          ? response.rows[0]
+          : null
+        });
       });
-    });
+  } catch (err) {
+    console.error(err);
+    res.send('Error ' + err);
+  }
 });
 
 http.createServer(app).listen(port);
