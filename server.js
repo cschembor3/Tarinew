@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const { Pool } = require('pg');
-const async = require('async');
 
 const app = express();
 const pool = new Pool({
@@ -52,7 +51,7 @@ app.post('/', async function (req, res, next) {
 /*
  * Gets the character information for the given id
  */
-app.get('/players/:playerId', function(req, res, next) {
+app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
   let characterData = {};
