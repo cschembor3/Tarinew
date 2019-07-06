@@ -7,23 +7,27 @@
             'https://boiling-sea-30343.herokuapp.com/players/Balanzar',
             function(data) {
                 data = JSON.stringify(data);
-                console.log(data);
-                const playerObj = JSON.parse(data).response;
-                document.getElementById('level').append(playerObj.level);
+                const playerObj = JSON.parse(data);
+                document.getElementById('level').append(playerObj.result.player.level);
                 
-                const spells = playerObj.spells;
-                const spellTable = document.getElementById('spellTable');
+                const spells = playerObj.result.spells;
+                const spellTable = document.getElementById('spellsTable');
                 spells.forEach(spell => {
                     const row = spellTable.insertRow();
                     const nameCell = row.insertCell(0);
-                    nameCell.innerHTML = spell.name;
+                    nameCell.innerHTML = spell.spellname;
                     const descCell = row.insertCell(1);
                     descCell.innerHTML = spell.description;
+                    const levelCell = row.insertCell(2);
+                    levelCell.innerHTML = spell.spelllevel;
                 });
             });
     </script>
-
-    <h1>Balanzar</h1>
+    <head>
+        <h1>Balanzar</h1>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./Characters.css"/>
+    </head>
     <h3>Race: Dragonborn</h3>
     <h3>Class: Rogue</h3>
     <h3 id="level">Level: </h3>
@@ -33,6 +37,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Level</th>
         </tr>
     </table>
 
