@@ -82,11 +82,11 @@ app.get('/players/:playerId', async function(req, res, next) {
           ? response.rows
           : null;
       });
-
+*/
       res.json({
         'result': characterData
       });
-      */
+      
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
