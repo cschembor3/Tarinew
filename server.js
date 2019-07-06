@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const async = require('async');
 const { Pool } = require('pg');
 
 const app = express();
@@ -56,35 +57,42 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    await client.query(
-      'SELECT name, level ' +
-      'FROM character_info_table ' +
-      'WHERE name = $1',
-      [playerId], (error, response) => {
-        if (error) {
-          res.send('Error: ' + error);
-        }
-
-        characterData.player = null
-      });
-/*
-    await client.query('SELECT spellName, description, spellLevel ' +
-      'FROM spells ' +
-      'WHERE name = $1',
-      [playerId], (error, response) => {
-        if (error) {
-          res.send('Error: ' + error);
-        }
-
-        characterData.spells = response
-          ? response.rows
-          : null;
-      });
-*/
-      res.json({
-        'result': characterData
-      });
-      
+    async.parallel([
+      function(parallel_done) {
+        await client.query(
+          'SELECT name, level ' +
+          'FROM character_info_table ' +
+          'WHERE name = $1',
+          [playerId], (error, response) => {
+            if (error) {
+              res.send('Error: ' + error);
+            }
+    
+            characterData.player = response
+              ? response.rows[0]
+              : null;
+          });
+      },
+      function(parallel_done) {
+        await client.query('SELECT spellName, description, spellLevel ' +
+        'FROM spells ' +
+        'WHERE name = $1',
+        [playerId], (error, response) => {
+          if (error) {
+            res.send('Error: ' + error);
+          }
+  
+          characterData.spells = response
+            ? response.rows
+            : null;
+        });
+      },
+      function(err) {
+        res.json({
+          'result': characterData
+        });
+      }
+    ]);
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);

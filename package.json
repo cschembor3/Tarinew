@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/cschembor3/Tarinew#readme",
   "dependencies": {
+    "async": "^3.1.0",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "pg": "^7.11.0",
