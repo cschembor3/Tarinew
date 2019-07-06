@@ -54,8 +54,6 @@ app.post('/', async function (req, res, next) {
 app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
-  let playerInfo = null;
-  let playerSpells = null;
   try {
     await client.query(
       'SELECT name, level ' +
@@ -66,7 +64,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        playerInfo = response[0];
+        var playerInfo = response[0];
       });
 
       await client.query('SELECT spellName, description, spellLevel ' +
@@ -77,7 +75,7 @@ app.get('/players/:playerId', async function(req, res, next) {
             res.send('Error: ' + error);
           }
 
-          playerSpells = response;
+          var playerSpells = response;
         });
 
         res.json({
