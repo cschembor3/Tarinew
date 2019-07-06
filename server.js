@@ -53,7 +53,7 @@ app.post('/', async function (req, res, next) {
  * Gets the character information for the given id
  */
 app.get('/players/:playerId', function(req, res, next) {
-  const client = await pool.connect();
+  const client = pool.connect().result;
   const playerId = req.params.playerId;
   let characterData = {};
   try {
