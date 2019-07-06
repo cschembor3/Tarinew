@@ -75,10 +75,9 @@ app.get('/players/:playerId', async function(req, res, next) {
         });
     });
 
-    /*
     const spellsPromise = new Promise(function(resolve, reject) {
         client.query(
-        'SELECT spellName, description, spellLevel ' +
+        'SELECT spellname, description, spelllevel ' +
         'FROM spells ' +
         'WHERE name = $1',
         [playerId], (error, response) => {
@@ -94,9 +93,8 @@ app.get('/players/:playerId', async function(req, res, next) {
           resolve();
         });
     });
-    */
 
-    Promise.all([playerPromise]).then(() => {
+    Promise.all([playerPromise, spellsPromise]).then(() => {
       res.json({
         'result': characterData
       });
