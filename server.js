@@ -56,37 +56,47 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    await client.query(
-      'SELECT name, level ' +
-      'FROM character_info_table ' +
-      'WHERE name = $1',
-      [playerId], async (error, response) => {
-        if (error) {
-          res.send(error);
-        }
-
-        characterData.player = response
-          ? response.rows[0]
-          : null;
-
-        await client.query(
-          'SELECT spellName, description, spellLevel ' +
-          'FROM spells ' +
-          'WHERE name = $1',
-          [playerId], (error, response) => {
-            if (error) {
-              res.send(error);
-            }
-    
-            characterData.spells = response
-              ? response.rows
-              : null;
-          });
+    const playerPromise =  new Promise(function(resolve, reject) {
+      client.query(
+        'SELECT name, level ' +
+        'FROM character_info_table ' +
+        'WHERE name = $1',
+        [playerId], async (error, response) => {
+          if (error) {
+            res.send(error);
+          }
+  
+          characterData.player = response
+            ? response.rows[0]
+            : null;
           
-          res.json({
-            'result': characterData
-          });
+          resolve();
+        });
+    });
+
+    const spellsPromise = new Promise(function(resolve, reject) {
+      await client.query(
+        'SELECT spellName, description, spellLevel ' +
+        'FROM spells ' +
+        'WHERE name = $1',
+        [playerId], (error, response) => {
+          if (error) {
+            res.send(error);
+          }
+  
+          characterData.spells = response
+            ? response.rows
+            : null;
+
+          resolve();
+        });
+    });
+
+    Promise.all([playerPromise, spellsPromise]).then(() => {
+      res.json({
+        'result': characterData
       });
+    });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
