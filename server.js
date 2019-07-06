@@ -66,7 +66,9 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        playerInfo = response[0];
+        res.json({
+          'player': response.rows[0]
+        });
       });
 
       /*
