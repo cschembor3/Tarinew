@@ -63,6 +63,7 @@ app.get('/players/:playerId', async function(req, res, next) {
         'WHERE name = $1',
         [playerId], async (error, response) => {
           if (error) {
+            reject();
             res.send(error);
           }
   
@@ -81,6 +82,7 @@ app.get('/players/:playerId', async function(req, res, next) {
         'WHERE name = $1',
         [playerId], (error, response) => {
           if (error) {
+            reject();
             res.send(error);
           }
   
