@@ -65,9 +65,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        characterData.player = response
-          ? response.rows[0]
-          : null;
+        characterData.player = null
       });
 /*
     await client.query('SELECT spellName, description, spellLevel ' +
