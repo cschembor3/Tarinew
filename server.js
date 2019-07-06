@@ -55,6 +55,7 @@ app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
   try {
+    console.log(playerId);
     await client.query(
       'SELECT spells.spellName, spells.description, spells.spellLevel ' +
       'FROM spells ' +
