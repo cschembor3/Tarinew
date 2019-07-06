@@ -72,6 +72,7 @@ app.get('/players/:playerId', async function(req, res, next) {
               ? response.rows[0]
               : null;
           });
+          parallel_done();
       },
       function(parallel_done) {
         client.query('SELECT spellName, description, spellLevel ' +
@@ -86,6 +87,7 @@ app.get('/players/:playerId', async function(req, res, next) {
             ? response.rows
             : null;
         });
+        parallel_done();
       },
       function(err) {
         res.json({
