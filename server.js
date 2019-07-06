@@ -61,7 +61,7 @@ app.get('/players/:playerId', async function(req, res, next) {
         'SELECT name, level ' +
         'FROM character_info_table ' +
         'WHERE name = $1',
-        [playerId], async (error, response) => {
+        [playerId], (error, response) => {
           if (error) {
             reject();
             res.send(error);
