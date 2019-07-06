@@ -64,10 +64,6 @@ app.get('/players/:playerId', async function(req, res, next) {
           'FROM character_info_table ' +
           'WHERE name = $1',
           [playerId], (error, response) => {
-            if (error) {
-              res.send('Error: ' + error);
-            }
-    
             characterData.player = response
               ? response.rows[0]
               : null;
@@ -79,10 +75,6 @@ app.get('/players/:playerId', async function(req, res, next) {
         'FROM spells ' +
         'WHERE name = $1',
         [playerId], (error, response) => {
-          if (error) {
-            res.send('Error: ' + error);
-          }
-  
           characterData.spells = response
             ? response.rows
             : null;
