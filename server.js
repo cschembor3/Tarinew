@@ -65,6 +65,8 @@ app.get('/players/:playerId', async function(req, res, next) {
         res.send('Error: ' + error);
       }
 
+      console.log(response);
+
       res.json({
         'response': response
         ? response.rows[0]
