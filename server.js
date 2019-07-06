@@ -71,7 +71,6 @@ app.get('/players/:playerId', async function(req, res, next) {
         });
       });
 
-      /*
     await client.query('SELECT spellName, description, spellLevel ' +
       'FROM spells ' +
       'WHERE name = $1',
@@ -80,9 +79,10 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        playerSpells = response;
+        res.json({
+          'spells': response.rows
+        });
       });
-      */
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
