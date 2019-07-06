@@ -9,7 +9,7 @@ const pool = new Pool({
   ssl: true
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 12345;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -67,21 +67,21 @@ app.get('/players/:playerId', async function(req, res, next) {
         var playerInfo = response[0];
       });
 
-      await client.query('SELECT spellName, description, spellLevel ' +
-        'FROM spells ' +
-        'WHERE name = $1',
-        [playerId], (error, response) => {
-          if (error) {
-            res.send('Error: ' + error);
-          }
+    await client.query('SELECT spellName, description, spellLevel ' +
+      'FROM spells ' +
+      'WHERE name = $1',
+      [playerId], (error, response) => {
+        if (error) {
+          res.send('Error: ' + error);
+        }
 
-          var playerSpells = response;
-        });
+        var playerSpells = response;
+      });
 
-        res.json({
-          'player': playerInfo,
-          'spells': playerSpells
-        });
+    res.json({
+      'player': playerInfo,
+      'spells': playerSpells
+    });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
