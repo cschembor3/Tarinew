@@ -54,8 +54,8 @@ app.post('/', async function (req, res, next) {
 app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
-  let playerInfo = "";
-  let playerSpells = "";
+  let playerInfo = null;
+  let playerSpells = null;
   try {
     await client.query(
       'SELECT name, level ' +
