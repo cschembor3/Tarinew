@@ -56,7 +56,6 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    /*
     const playerPromise =  new Promise(function(resolve, reject) {
       client.query(
         'SELECT name, level ' +
@@ -75,7 +74,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           resolve();
         });
     });
-    */
+
     const spellsPromise = new Promise(function(resolve, reject) {
         client.query(
         'SELECT spellname, description, spelllevel ' +
