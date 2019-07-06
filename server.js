@@ -59,7 +59,7 @@ app.get('/players/:playerId', async function(req, res, next) {
   try {
     async.parallel([
       function(parallel_done) {
-        await client.query(
+        client.query(
           'SELECT name, level ' +
           'FROM character_info_table ' +
           'WHERE name = $1',
@@ -74,7 +74,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           });
       },
       function(parallel_done) {
-        await client.query('SELECT spellName, description, spellLevel ' +
+        client.query('SELECT spellName, description, spellLevel ' +
         'FROM spells ' +
         'WHERE name = $1',
         [playerId], (error, response) => {
