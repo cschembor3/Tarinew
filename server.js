@@ -69,18 +69,19 @@ app.get('/players/:playerId', async function(req, res, next) {
           ? response.rows[0]
           : null;
 
-          await client.query('SELECT spellName, description, spellLevel ' +
-            'FROM spells ' +
-            'WHERE name = $1',
-            [playerId], (error, response) => {
-              if (error) {
-                res.send(error);
-              }
-      
-              characterData.spells = response
-                ? response.rows
-                : null;
-            });
+        await client.query(
+          'SELECT spellName, description, spellLevel ' +
+          'FROM spells ' +
+          'WHERE name = $1',
+          [playerId], (error, response) => {
+            if (error) {
+              res.send(error);
+            }
+    
+            characterData.spells = response
+              ? response.rows
+              : null;
+          });
           
           res.json({
             'result': characterData
