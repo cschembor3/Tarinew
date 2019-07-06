@@ -30,7 +30,7 @@ app.post('/', async function (req, res, next) {
   let characterLevel = req.body.characterLevel;
   try {
     const client = await pool.connect();
-    const dbReq = await client.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
+    const dbReq = await pool.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
       [2, characterName, characterRace, characterClass, characterLevel], (error, response) => {
         if (error) {
           throw error;
@@ -52,11 +52,11 @@ app.post('/', async function (req, res, next) {
  * Gets the character information for the given id
  */
 app.get('/players/:playerId', async function(req, res, next) {
-  const client = await pool.connect();
+  //const client = await pool.connect();
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    await client.query(
+    await pool.query(
       'SELECT name, level ' +
       'FROM character_info_table ' +
       'WHERE name = $1',
@@ -66,7 +66,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           : null;
       });
       
-    await client.query('SELECT spellName, description, spellLevel ' +
+    await pool.query('SELECT spellName, description, spellLevel ' +
       'FROM spells ' +
       'WHERE name = $1',
       [playerId], (error, response) => {
