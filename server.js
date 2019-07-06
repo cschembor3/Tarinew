@@ -79,7 +79,7 @@ app.get('/players/:playerId', async function(req, res, next) {
         client.query(
         'SELECT spellname, description, spelllevel ' +
         'FROM spells ' +
-        'WHERE name = $1',
+        'WHERE charactername = $1',
         [playerId], (error, response) => {
           if (error) {
             reject();
