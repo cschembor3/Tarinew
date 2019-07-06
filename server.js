@@ -55,8 +55,10 @@ app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
   await client.query(
-    'SELECT * FROM character_info_table, spells WHERE character_info_table.name = $1 AND spells.charactername = $2',
-    [playerId, playerId],
+    'SELECT character_info_table.name, character_info_table.level, spells.name, spells.description' +
+    'FROM character_info_table, spells' +
+    'WHERE character_info_table.name = $1 AND spells.charactername = $1',
+    [playerId],
     (error, response) => {
       if (error) {
         console.log(error);
