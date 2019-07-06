@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const { Pool } = require('pg');
+const async = require('async');
 
 const app = express();
 const pool = new Pool({
