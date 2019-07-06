@@ -75,7 +75,7 @@ app.get('/players/:playerId', async function(req, res, next) {
     });
 
     const spellsPromise = new Promise(function(resolve, reject) {
-      await client.query(
+        client.query(
         'SELECT spellName, description, spellLevel ' +
         'FROM spells ' +
         'WHERE name = $1',
