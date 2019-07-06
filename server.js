@@ -54,8 +54,7 @@ app.post('/', async function (req, res, next) {
 app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
-  let playerInfo = null;
-  let playerSpells = null;
+  let characterData = {};
   try {
     await client.query(
       'SELECT name, level ' +
@@ -66,9 +65,9 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        res.json({
-          'player': response.rows[0]
-        });
+        characterData.player = response
+          ? response.rows[0]
+          : null;
       });
 
     await client.query('SELECT spellName, description, spellLevel ' +
@@ -79,9 +78,13 @@ app.get('/players/:playerId', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        res.json({
-          'spells': response.rows
-        });
+        characterData.spells = response
+          ? response.rows
+          : null;
+      });
+
+      res.json({
+        'result': characterData
       });
   } catch (err) {
     console.error(err);
