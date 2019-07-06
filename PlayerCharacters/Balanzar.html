@@ -10,7 +10,17 @@
                 console.log(data);
                 const playerObj = JSON.parse(data).response;
                 document.getElementById('level').append(playerObj.level);
-        });
+                
+                const spells = playerObj.spells;
+                const spellTable = document.getElementById('spellTable');
+                spells.forEach(spell => {
+                    const row = spellTable.insertRow();
+                    const nameCell = row.insertCell(0);
+                    nameCell.innerHTML = spell.name;
+                    const descCell = row.insertCell(1);
+                    descCell.innerHTML = spell.description;
+                });
+            });
     </script>
 
     <h1>Balanzar</h1>
@@ -18,5 +28,12 @@
     <h3>Class: Rogue</h3>
     <h3 id="level">Level: </h3>
     
-    
+    <h3>Spells</h3>
+    <table id="spellsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </table>
+
 </html>
