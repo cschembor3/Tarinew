@@ -54,24 +54,36 @@ app.post('/', async function (req, res, next) {
 app.get('/players/:playerId', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
+  const playerInfo;
+  const playerSpells;
   try {
     await client.query(
-      'SELECT character_info_table.name, character_info_table.level, spells.spellName, spells.description, spells.spellLevel ' +
-      'FROM character_info_table, spells ' +
-      'WHERE character_info_table.name = $1 AND spells.characterName = $1;',
-      [playerId],
-      (error, response) => {
+      'SELECT name, level ' +
+      'FROM character_info_table ' +
+      'WHERE name = $1',
+      [playerId], (error, response) => {
         if (error) {
-          console.log(error);
           res.send('Error: ' + error);
         }
 
-        res.json({
-          'response': response
-          ? response.rows[0]
-          : null
-        });
+        playerInfo = response[0];
       });
+
+      await client.query('SELECT spellName, description, spellLevel ' +
+        'FROM spells ' +
+        'WHERE name = $1',
+        [playerId], (error, response) => {
+          if (error) {
+            res.send('Error: ' + error);
+          }
+
+          playerSpells = response;
+        });
+
+        res.json({
+          'player': playerInfo,
+          'spells': playerSpells
+        });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
