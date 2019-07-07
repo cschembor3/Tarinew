@@ -10,12 +10,14 @@
                 const playerObj = JSON.parse(data);
                 document.getElementById('level').append(playerObj.result.player.level);
                 
+                const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
                 const spells = playerObj.result.spells;
                 const spellTable = document.getElementById('spellsTable');
                 spells.forEach(spell => {
                     const row = spellTable.insertRow();
                     const nameCell = row.insertCell(0);
-                    nameCell.innerHTML = spell.spellname;
+                    const formattedSpellName = spell.spellname.replace(' ', '-');
+                    nameCell.innerHTML = '<a href="' + dndBeyondSpells + formattedSpellName + '" target="_blank">' + spell.spellname + '</a>';
                     const descCell = row.insertCell(1);
                     descCell.innerHTML = spell.description;
                     const levelCell = row.insertCell(2);
