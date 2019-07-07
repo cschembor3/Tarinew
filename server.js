@@ -55,8 +55,8 @@ app.post('/players/:playerId/items', async function(req, res, next) {
   try {
     await client.query(
       'INSERT INTO items ' +
-      '(itemid, itemname, itemdescription, charactername) VALUES ($1, $2, $3, $4) ' +
-      [1, itemName, itemDescription, playerId],
+      '(temname, itemdescription, charactername) VALUES ($1, $2, $3) ' +
+      [itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
           throw error
@@ -81,7 +81,7 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
   try {
     await client.query(
       'INSERT INTO spells ' +
-      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4' +
+      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4)' +
       [spellName, spellDescription, spellLevel, playerId],
       (error, response) => {
         if (error) {
