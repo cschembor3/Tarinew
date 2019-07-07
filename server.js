@@ -49,9 +49,10 @@ app.post('/', async function (req, res, next) {
  */
 app.post('/players/:playerId/items', async function(req, res, next) {
   const client = await pool.connect();
-  let playerId = req.params.playerId;
-  let itemName = req.body.itemName;
-  let itemDescription = req.body.itemDescription;
+  res.send(JSON.stringify(req));
+  const playerId = req.params.playerId;
+  const itemName = req.body.itemName;
+  const itemDescription = req.body.itemDescription;
   res.send('playerid: ' + playerId
   + '\nitem name: ' + itemName
   + '\nitem description: ' + itemDescription);
