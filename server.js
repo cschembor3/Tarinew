@@ -62,7 +62,7 @@ app.post('/players/:playerId/items', async function(req, res, next) {
     await pool.query(
       'INSERT INTO items ' +
       '(itemname, itemdescription, charactername) VALUES ($1, $2, $3);' +
-      ["'" + itemName + "'", "'" + itemDescription + "'", "'" + playerId + "'"],
+      [itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
           res.send('Error: ' + error
