@@ -11,7 +11,7 @@ const pool = new Pool({
 
 const port = process.env.PORT || 12345;
 
-app.use(bodyParser);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -61,7 +61,7 @@ app.post('/players/:playerId/items', async function(req, res, next) {
         if (error) {
           res.send('Error: ' + error
                     + 'itemname: ' + itemName
-                    + '\nitemdescription: ' + itemDescription);
+                    + 'itemdescription: ' + itemDescription);
         }
 
         res.status(201).end();
