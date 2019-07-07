@@ -42,7 +42,18 @@
             <th>Level</th>
         </tr>
     </table>
-    <button id="addSpell" onclick="addItem('spellsTable')">Add spell</button>
+    <button id="addSpell" onclick="openSpellsForm()">Add spell</button>
+    <div id="spellInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addSpell()">
+            <label for="name">Spell Name</label>
+            <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
+            <label for="description">Spell Description</label>
+            <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
+            <label for="level">Spell Level</label>
+            <input type="number" id="spellLevel" name="level" required>
+            <button type="submit" class="btn">Add Spell</button>
+        </form>
+    </div>
 
     <h3>Items</h3>
     <table id="itemsTable">
@@ -51,9 +62,9 @@
             <th>Description</th>
         </tr>
     </table>
-    <button id="addItem" onclick="openAddItemForm()">Add item</button>
-    <div id="spellInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addItem('itemsTable')">
+    <button id="addItem" onclick="openItemsForm()">Add item</button>
+    <div id="itemInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addItem()">
             <label for="name">Item Name</label>
             <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
             <label for="description">Item Description</label>
@@ -63,33 +74,70 @@
     </div>
 
     <script>
-        function openAddItemForm() {
+        // TODO: consolidate these form calls into one?
+        function openItemsForm() {
+            document.getElementById('itemInfoForm').style.display = 'block';
+        }
+
+        function openSpellsForm() {
             document.getElementById('spellInfoForm').style.display = 'block';
         }
 
-        function closeAddItemForm() {
+        function closeItemsForm() {
+            document.getElementById('itemInfoForm').style.display = 'none';
+        }
+
+        function closeSpellsForm() {
             document.getElementById('spellInfoForm').style.display = 'none';
         }
 
-        function addItem(tableId) {
-            const itemsTable = document.getElementById(tableId);
-            const newRow = itemsTable.insertRow();
-            const cell1 = newRow.insertCell(0);
-            const inputItemName = $('#itemName').val();
-            cell1.innerHTML = inputItemName;
-            const cell2 = newRow.insertCell(1);
-            const inputItemDescription = $('#itemDescription').val();
-            cell2.innerHTML = inputItemDescription;
+        function addElementToTable(table, ...tableEntries) {
+            const newRow = table.insertRow();
+            let newCell = null;
+            let inputName = null;
+            tableEntries.forEach(entry => {
+                newCell = newRow.insertCell();
+                newCell.innerHTML = entry;
+            });
+        }
 
-            item = {};
-            item.itemName = inputItemName;
-            item.itemDescription = inputItemDescription;
+        /*
+         * Add an item to the table and database
+         */
+        function addItem() {
+            const table = document.getElementById('itemsTable');
+            const itemName = $('#itemName').val();
+            const itemDescription = $('#itemDescription').val();
+            addElementToTable(table, itemName, itemDescription);
             $.post(
-                'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
-                item
-            );
+            'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
+            {
+                itemName: itemName,
+                itemDescription: itemDescription
+            });
+            
+            closeItemsForm();
+            return false;
+        }
 
-            closeAddItemForm();
+        /*
+         * Add a spell to the table and database
+         */
+        function addSpell() {
+            const table = document.getElementById('spellsTable');
+            const spellName = $('spellName').val();
+            const spellDescription = $('spellDescription').val();
+            const spellLevel = $('spellLevel').val();
+            addElementToTable(table, spellName, spellDescription, spellLevel);
+            $.post(
+                'https://boiling-sea-30343.herokuapp.com/players/Balanzar/spells',
+                {
+                    spellName: spellName,
+                    spellDescription: spellDescription,
+                    spellLevel: spellLevel
+                });
+            
+            closeSpellsForm();
             return false;
         }
     </script>

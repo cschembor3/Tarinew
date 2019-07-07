@@ -49,15 +49,9 @@ app.post('/', async function (req, res, next) {
  * Add an item to a given player
  */
 app.post('/players/:playerId/items', async function(req, res, next) {
-  const client = await pool.connect();
   const playerId = req.params.playerId;
   const itemName = req.body.itemName;
   const itemDescription = req.body.itemDescription;
-  /*
-  res.send('playerid: ' + playerId
-  + '\nitem name: ' + itemName
-  + '\nitem description: ' + itemDescription);
-  */
   try {
     await pool.query(
       'INSERT INTO items ' +
@@ -65,15 +59,11 @@ app.post('/players/:playerId/items', async function(req, res, next) {
       [itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
-          res.send('Error: ' + error
-                    + '\nitemname: ' + itemName
-                    + '\nitemdescription: ' + itemDescription);
+          res.send('Error: ' + error);
         }
 
         res.status(201).end();
       });
-
-    client.release();
   } catch (err) {
     res.send('Error ' + err);
   }
@@ -83,23 +73,22 @@ app.post('/players/:playerId/items', async function(req, res, next) {
  * Add a spell to a given player
  */
 app.post('/players/:playerId/spells', async function(req, res, next) {
-  const client = await pool.connect();
   const playerId = req.params.playerId;
   const spellName = req.body.spellname;
   const spellDescription = req.body.description;
   const spellLevel = req.body.spelllevel;
   try {
-    await client.query(
+    await pool.query(
       'INSERT INTO spells ' +
-      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4)' +
+      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4)',
       [spellName, spellDescription, spellLevel, playerId],
       (error, response) => {
         if (error) {
-          throw error;
+          res.send('Error: ' + error);
         }
-      });
 
-      client.release();
+        res.status(201).end();
+      });
   } catch (err) {
     res.send('Error ' + err);
   }
