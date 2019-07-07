@@ -125,9 +125,9 @@
          */
         function addSpell() {
             const table = document.getElementById('spellsTable');
-            const spellName = $('spellName').val();
-            const spellDescription = $('spellDescription').val();
-            const spellLevel = $('spellLevel').val();
+            const spellName = $('#spellName').val();
+            const spellDescription = $('#spellDescription').val();
+            const spellLevel = $('#spellLevel').val();
             addElementToTable(table, spellName, spellDescription, spellLevel);
             $.post(
                 'https://boiling-sea-30343.herokuapp.com/players/Balanzar/spells',
