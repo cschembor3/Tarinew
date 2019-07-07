@@ -49,10 +49,9 @@ app.post('/', async function (req, res, next) {
  */
 app.post('/players/:playerId/items', async function(req, res, next) {
   const client = await pool.connect();
-  const playerId = req.params.playerId;
-  const jsonBody = JSON.parse(JSON.stringify(req.body));
-  const itemName = jsonBody.itemName;
-  const itemDescription = jsonBody.itemDescription;
+  let playerId = req.params.playerId;
+  let itemName = req.body.itemName;
+  let itemDescription = req.body.itemDescription;
   try {
     await client.query(
       'INSERT INTO items ' +
@@ -61,8 +60,8 @@ app.post('/players/:playerId/items', async function(req, res, next) {
       (error, response) => {
         if (error) {
           res.send('Error: ' + error
-                    + 'itemname: ' + itemName
-                    + 'itemdescription: ' + itemDescription);
+                    + '\nitemname: ' + itemName
+                    + '\nitemdescription: ' + itemDescription);
         }
 
         res.status(201).end();
