@@ -12,7 +12,7 @@ const pool = new Pool({
 const port = process.env.PORT || 12345;
 
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -51,8 +51,8 @@ app.post('/', async function (req, res, next) {
 app.post('/players/:playerId/items', async function(req, res, next) {
   const client = await pool.connect();
   const playerId = req.params.playerId;
-  const itemName = decodeURIComponent(req.body.itemName);
-  const itemDescription = decodeURIComponent(req.body.itemDescription);
+  const itemName = req.body.itemName;
+  const itemDescription = req.body.itemDescription;
   /*
   res.send('playerid: ' + playerId
   + '\nitem name: ' + itemName
@@ -62,7 +62,7 @@ app.post('/players/:playerId/items', async function(req, res, next) {
     await pool.query(
       'INSERT INTO items ' +
       '(itemname, itemdescription, charactername) VALUES ($1, $2, $3);' +
-      [itemName, itemDescription, playerId],
+      ["'" + itemName + "'", "'" + itemDescription + "'", "'" + playerId + "'"],
       (error, response) => {
         if (error) {
           res.send('Error: ' + error
