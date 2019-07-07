@@ -63,7 +63,7 @@ app.post('/players/:playerId/items', async function(req, res, next) {
         }
       });
 
-      client.release();
+    client.release();
   } catch (err) {
     res.send('Error ' + err);
   }
