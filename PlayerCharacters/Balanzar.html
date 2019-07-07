@@ -83,11 +83,10 @@
 
             $.post(
                 'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
-                JSON.stringify(
-                    {
-                        'itemName': inputItemName,
-                        'itemDescription': inputItemDescription
-                    })
+                {
+                    itemName: inputItemName,
+                    itemDescription: inputItemDescription
+                }
             );
 
             closeAddItemForm();
