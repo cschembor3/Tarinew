@@ -81,13 +81,12 @@
             const inputItemDescription = $('#itemDescription').val();
             cell2.innerHTML = inputItemDescription;
 
+            item = {};
+            item.itemName = inputItemName;
+            item.itemDescription = inputItemDescription;
             $.post(
                 'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
-                JSON.stringify(
-                {
-                    itemName: inputItemName,
-                    itemDescription: inputItemDescription
-                })
+                item
             );
 
             closeAddItemForm();
