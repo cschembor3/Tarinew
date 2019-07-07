@@ -58,9 +58,9 @@ app.post('/players/:playerId/items', async function(req, res, next) {
       '(itemname, itemdescription, charactername) VALUES ($1, $2, $3);' +
       [itemName, itemDescription, playerId],
       (error, response) => {
-        //if (error) {
-        //  throw error;
-        //}
+        if (error) {
+          res.send('Error: ' + error);
+        }
 
         res.status(201).end();
       });
