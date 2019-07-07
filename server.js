@@ -12,7 +12,7 @@ const pool = new Pool({
 const port = process.env.PORT || 12345;
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS
 app.use(function(req, res, next) {
