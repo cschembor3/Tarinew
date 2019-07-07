@@ -42,5 +42,57 @@
             <th>Level</th>
         </tr>
     </table>
+    <button id="addSpell" onclick="addItem('spellsTable')">Add spell</button>
+
+    <h3>Items</h3>
+    <table id="itemsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </table>
+    <button id="addItem" onclick="openAddItemForm()">Add item</button>
+    <div id="spellInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addItem('itemsTable')">
+            <label for="name">Item Name</label>
+            <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
+            <label for="description">Item Description</label>
+            <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
+            <button type="submit" class="btn">Add Item</button>
+        </form>
+    </div>
+
+    <script>
+        function openAddItemForm() {
+            document.getElementById('spellInfoForm').style.display = 'block';
+        }
+
+        function closeAddItemForm() {
+            document.getElementById('spellInfoForm').style.display = 'none';
+        }
+
+        function addItem(tableId) {
+            const itemsTable = document.getElementById(tableId);
+            const newRow = itemsTable.insertRow();
+            const cell1 = newRow.insertCell(0);
+            const inputItemName = $('#itemName').val();
+            cell1.innerHTML = inputItemName;
+            const cell2 = newRow.insertCell(1);
+            const inputItemDescription = $('#itemDescription').val();
+            cell2.innerHTML = inputItemDescription;
+
+            $.post(
+                'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
+                {
+                    itemname: inputItemName,
+                    itemdescription: inputItemDescription,
+                    charactername: 'Balanzar'
+                }
+            );
+            
+            closeAddItemForm();
+            return false;
+        }
+    </script>
 
 </html>

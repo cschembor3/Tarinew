@@ -30,21 +30,68 @@ app.post('/', async function (req, res, next) {
   let characterLevel = req.body.characterLevel;
   try {
     const client = await pool.connect();
-    const dbReq = await pool.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
-      [2, characterName, characterRace, characterClass, characterLevel], (error, response) => {
+    await pool.query('INSERT INTO character_info_table (id, name, race, class, level) VALUES ($1, $2, $3, $4, $5)',
+      [2, characterName, characterRace, characterClass, characterLevel],
+      (error, response) => {
         if (error) {
           throw error;
         }
       });
-    const result = await client.query('SELECT * FROM character_info_table');
-    const results = { 'results': (result) ? result.rows : null};
-    res.json({
-      response: results
-    });
     client.release();
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
+  }
+});
+
+/*
+ * Add an item to a given player
+ */
+app.post('/players/:playerId/items', async function(req, res, next) {
+  const client = await pool.connect();
+  const playerId = req.params.playerId;
+  const itemName = req.body.itemName;
+  const itemDescription = req.body.itemDescription;
+  try {
+    await client.query(
+      'INSERT INTO items ' +
+      '(itemName, itemDescription, characterName) VALUES ($1, $2, $3, $4) ' +
+      [itemName, itemDescription, playerId],
+      (error, response) => {
+        if (error) {
+          throw error;
+        }
+      });
+
+      client.release();
+  } catch (err) {
+    res.send('Error ' + err);
+  }
+});
+
+/*
+ * Add a spell to a given player
+ */
+app.post('/players/:playerId/spells', async function(req, res, next) {
+  const client = await pool.connect();
+  const playerId = req.params.playerId;
+  const spellName = req.body.spellname;
+  const spellDescription = req.body.description;
+  const spellLevel = req.body.spelllevel;
+  try {
+    await client.query(
+      'INSERT INTO spells ' +
+      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4' +
+      [spellName, spellDescription, spellLevel, playerId],
+      (error, response) => {
+        if (error) {
+          throw error;
+        }
+      });
+
+      client.release();
+  } catch (err) {
+    res.send('Error ' + err);
   }
 });
 

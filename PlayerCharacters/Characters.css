@@ -7,3 +7,16 @@ table, th, td {
 a:link {
     text-decoration: none;
 }
+
+button {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+button:active {
+    background-color: gray;
+}
+
+.form-popup {
+    display: none;
+}
