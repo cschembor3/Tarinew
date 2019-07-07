@@ -50,7 +50,6 @@ app.post('/', async function (req, res, next) {
  */
 app.post('/players/:playerId/items', async function(req, res, next) {
   const client = await pool.connect();
-  const data = {id: req.params.playerId, name: req.body.itemName, description: req.body.itemDescription };
   const playerId = req.params.playerId;
   const itemName = req.body.itemName;
   const itemDescription = req.body.itemDescription;
@@ -62,8 +61,8 @@ app.post('/players/:playerId/items', async function(req, res, next) {
   try {
     await pool.query(
       'INSERT INTO items ' +
-      '(itemname, itemdescription, charactername) VALUES ($1, $2, $3);' +
-      [data.name, data.description, data.id],
+      '(itemname, itemdescription, charactername) VALUES ($1, $2, $3)',
+      [itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
           res.send('Error: ' + error
