@@ -59,7 +59,9 @@ app.post('/players/:playerId/items', async function(req, res, next) {
       [itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
-          res.send('Error: ' + error);
+          res.error('Error: ' + error
+                    + 'itemname: ' + itemName
+                    + 'itemdescription: ' + itemDescription);
         }
 
         res.status(201).end();
