@@ -55,8 +55,8 @@ app.post('/players/:playerId/items', async function(req, res, next) {
   try {
     await client.query(
       'INSERT INTO items ' +
-      '(itemname, itemdescription, charactername) VALUES ($1, $2, $3) ' +
-      [itemName, itemDescription, playerId],
+      '(itemid, itemname, itemdescription, charactername) VALUES ($1, $2, $3, $4) ' +
+      [1, itemName, itemDescription, playerId],
       (error, response) => {
         if (error) {
           throw error
