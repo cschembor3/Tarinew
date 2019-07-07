@@ -11,6 +11,7 @@ const pool = new Pool({
 
 const port = process.env.PORT || 12345;
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS
@@ -49,7 +50,6 @@ app.post('/', async function (req, res, next) {
  */
 app.post('/players/:playerId/items', async function(req, res, next) {
   const client = await pool.connect();
-  res.send(JSON.stringify(req));
   const playerId = req.params.playerId;
   const itemName = req.body.itemName;
   const itemDescription = req.body.itemDescription;
