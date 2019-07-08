@@ -77,6 +77,8 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
   const spellName = req.body.spellname;
   const spellDescription = req.body.description;
   const spellLevel = req.body.spelllevel;
+  res.send('spellname: ' + spellName
+  + 'spelldescription: ' + spellDescription);
   try {
     await pool.query(
       'INSERT INTO spells ' +
