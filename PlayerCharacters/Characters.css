@@ -19,4 +19,29 @@ button:active {
 
 .form-popup {
     display: none;
+    border: none;
+    padding: 10px 16px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 10px;
+    max-width: 450px;
+}
+
+.form-container input[type=text], input[type=number] {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background-color: #f1f1f1;
+}
+
+.form-container .btn {
+    width: 100%;
+    padding: 12px;
+    background-color: lightgreen;
+}
+
+.form-container .cancel {
+    background-color: lightcoral;
 }
