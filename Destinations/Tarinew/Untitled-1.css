@@ -1,9 +1,0 @@
-table, th, td {
-    border: 1px solid #ddd;
-    border-collapse: collapse;
-    padding: 12px;
-}
-
-a:link {
-    text-decoration: none;
-}

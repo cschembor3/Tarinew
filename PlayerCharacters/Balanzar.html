@@ -110,11 +110,11 @@
             const itemDescription = $('#itemDescription').val();
             addElementToTable(table, itemName, itemDescription);
             $.post(
-            'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
-            {
-                itemName: itemName,
-                itemDescription: itemDescription
-            });
+                'https://boiling-sea-30343.herokuapp.com/players/Balanzar/items',
+                {
+                    itemName: itemName,
+                    itemDescription: itemDescription
+                });
             
             closeItemsForm();
             return false;
