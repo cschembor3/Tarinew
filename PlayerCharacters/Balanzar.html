@@ -19,7 +19,7 @@
                     const formattedSpellName = spell.spellname.replace(' ', '-');
                     nameCell.innerHTML = '<a href="' + dndBeyondSpells + formattedSpellName + '" target="_blank">' + spell.spellname + '</a>';
                     const descCell = row.insertCell(1);
-                    descCell.innerHTML = spell.description;
+                    descCell.innerHTML = spell.spelldescription;
                     const levelCell = row.insertCell(2);
                     levelCell.innerHTML = spell.spelllevel;
                 });
