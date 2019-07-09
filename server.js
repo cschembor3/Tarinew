@@ -123,7 +123,7 @@ app.get('/players/:playerId', async function(req, res, next) {
 
     const spellsPromise = new Promise(function(resolve, reject) {
         client.query(
-        'SELECT spellname, description, spelllevel ' +
+        'SELECT spellname, spelldescription, spelllevel ' +
         'FROM spells ' +
         'WHERE charactername = $1',
         [playerId], (error, response) => {
