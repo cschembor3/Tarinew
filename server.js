@@ -170,6 +170,8 @@ function constructResponse (dbResponse) {
 
   apiResponse.spells = spells;
   apiResponse.items = items;
+
+  return apiResponse;
 }
 
 
