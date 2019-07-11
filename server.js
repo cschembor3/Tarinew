@@ -98,27 +98,29 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
  * Gets the character information for the given id
  */
 app.get('/players/:playerId', async function(req, res, next) {
-  const client = await pool.connect();
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    await pool.query(
-      'SELECT * ' +
-      'FROM character_info_table, items, spells ' +
-      'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
-      [playerId],
-      (error, response) => {
-        if (error) {
-          reject();
-          res.send(error);
-        }
-
-        characterData = response;
+    const dbQuery = await new Promise(function(resolve, reject) {
+      pool.query(
+        'SELECT * ' +
+        'FROM character_info_table, items, spells ' +
+        'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
+        [playerId], (error, response) => {
+          if (error) {
+            reject();
+            res.send(error);
+          }
+  
+          characterData.player = response
+            ? response.rows[0]
+            : null;
+          
+          resolve();
+        });
     });
 
-    res.json({
-      'result': characterData
-    });
+    res.json(characterData);
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
