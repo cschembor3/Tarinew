@@ -102,48 +102,21 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    const playerPromise =  new Promise(function(resolve, reject) {
-      client.query(
-        'SELECT name, level ' +
-        'FROM character_info_table ' +
-        'WHERE name = $1',
+      await client.query(
+        'SELECT * ' +
+        'FROM character_info_table, items, spells ' +
+        'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
         [playerId], (error, response) => {
           if (error) {
             reject();
             res.send(error);
           }
   
-          characterData.player = response
-            ? response.rows[0]
-            : null;
-          
-          resolve();
-        });
+          characterData.player = response;
     });
 
-    const spellsPromise = new Promise(function(resolve, reject) {
-        client.query(
-        'SELECT spellname, spelldescription, spelllevel ' +
-        'FROM spells ' +
-        'WHERE charactername = $1',
-        [playerId], (error, response) => {
-          if (error) {
-            reject();
-            res.send(error);
-          }
-  
-          characterData.spells = response
-            ? response.rows
-            : null;
-
-          resolve();
-        });
-    });
-
-    Promise.all([spellsPromise]).then(() => {
-      res.json({
-        'result': characterData
-      });
+    res.json({
+      'result': characterData
     });
   } catch (err) {
     console.error(err);
