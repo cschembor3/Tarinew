@@ -102,7 +102,7 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    await client.query(
+    await pool.query(
       'SELECT * ' +
       'FROM character_info_table, items, spells ' +
       'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
@@ -116,9 +116,9 @@ app.get('/players/:playerId', async function(req, res, next) {
         characterData = response;
     });
 
-    //res.json({
-    //  'result': characterData
-    //});
+    res.json({
+      'result': characterData
+    });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
