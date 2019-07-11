@@ -152,19 +152,21 @@ function constructResponse (dbResponse) {
 
     // only map spell if all information is there
     if (spellName != null && spellDescription != null && spellLevel != null) {
-      spells.push(new {
-        spellName: spellName,
-        spellDescription: spellDescription,
-        spellLevel: spellLevel
-      });
+      spells.push(
+        {
+          spellName: spellName,
+          spellDescription: spellDescription,
+          spellLevel: spellLevel
+        });
     }
 
     // only map item if all information is there
     if (itemName != null && itemDescription != null) {
-      items.push(new {
-        itemName: itemNamem,
-        itemDescription: itemDescription
-      });
+      items.push(
+        {
+          itemName: itemNamem,
+          itemDescription: itemDescription
+        });
     }
   });
 
