@@ -164,7 +164,7 @@ function constructResponse (dbResponse) {
     if (itemName != null && itemDescription != null) {
       items.push(
         {
-          itemName: itemNamem,
+          itemName: itemName,
           itemDescription: itemDescription
         });
     }
