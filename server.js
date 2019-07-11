@@ -143,12 +143,12 @@ function constructResponse (dbResponse) {
   const spells = [];
   const items = [];
   data.forEach(row => {
-    const spellName = row.spellName;
-    const spellDescription = row.spellDescription;
-    const spellLevel = row.spellLevel;
+    const spellName = row.spellname;
+    const spellDescription = row.spelldescription;
+    const spellLevel = row.spelllevel;
 
-    const itemName = row.itemName;
-    const itemDescription = row.itemDescription;
+    const itemName = row.itemname;
+    const itemDescription = row.itemdescription;
 
     // only map spell if all information is there
     if (spellName != null && spellDescription != null && spellLevel != null) {
