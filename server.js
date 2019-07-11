@@ -106,13 +106,13 @@ app.get('/players/:playerId', async function(req, res, next) {
       'SELECT * ' +
       'FROM character_info_table, items, spells ' +
       'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
-      [playerId], (error, response) => {
+      [playerId],
+      (error, response) => {
         if (error) {
           reject();
           res.send(error);
         }
 
-        res.json(response);
         characterData = response;
     });
 
