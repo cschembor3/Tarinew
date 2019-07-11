@@ -112,10 +112,7 @@ app.get('/players/:playerId', async function(req, res, next) {
             res.send(error);
           }
   
-          characterData.player = response
-            ? response.rows[0]
-            : null;
-          
+          characterData.player = response;
           resolve();
         });
     });
