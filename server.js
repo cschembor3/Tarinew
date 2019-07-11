@@ -112,7 +112,7 @@ app.get('/players/:playerId', async function(req, res, next) {
             res.send(error);
           }
   
-          characterData.player = response;
+          characterData = constructResponse(response);
           resolve();
         });
     });
@@ -123,5 +123,55 @@ app.get('/players/:playerId', async function(req, res, next) {
     res.send('Error ' + err);
   }
 });
+
+/*
+ * Construct the player information API response
+ */
+function constructResponse (dbResponse) {
+  const apiResponse = {};
+  const data = dbResponse.rows;
+
+  // Map character information
+  apiResponse.characterInfo = {
+    name: data[0].name,
+    race: data[0].race,
+    class: data[0].class,
+    level: data[0].level
+  };
+
+  // Map spells and items
+  const spells = [];
+  const items = [];
+  data.forEach(row => {
+    const spellName = row.spellName;
+    const spellDescription = row.spellDescription;
+    const spellLevel = row.spellLevel;
+
+    const itemName = row.itemName;
+    const itemDescription = row.itemDescription;
+
+    // only map spell if all information is there
+    if (spellName != null && spellDescription != null && spellLevel != null) {
+      spells.push(new {
+        spellName: spellName,
+        spellDescription: spellDescription,
+        spellLevel: spellLevel
+      });
+    }
+
+    // only map item if all information is there
+    if (itemName != null && itemDescription != null) {
+      items.push(new {
+        itemName: itemNamem,
+        itemDescription: itemDescription
+      });
+    }
+  });
+
+  apiResponse.spells = spells;
+  apiResponse.items = items;
+}
+
+
 
 http.createServer(app).listen(port);
