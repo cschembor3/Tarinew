@@ -102,17 +102,18 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-      await client.query(
-        'SELECT * ' +
-        'FROM character_info_table, items, spells ' +
-        'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
-        [playerId], (error, response) => {
-          if (error) {
-            reject();
-            res.send(error);
-          }
-  
-          characterData.player = response;
+    await client.query(
+      'SELECT * ' +
+      'FROM character_info_table, items, spells ' +
+      'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
+      [playerId], (error, response) => {
+        if (error) {
+          reject();
+          res.send(error);
+        }
+
+        res.json(response);
+        characterData = response;
     });
 
     res.json({
