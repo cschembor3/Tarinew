@@ -124,11 +124,13 @@ app.get('/players/:playerId', async function(req, res, next) {
 
           characterData.spells = [];
           data.forEach(row => {
-            characterData.spells.push({
+            if (row.spellname != null && row.spelldescription != null && row.spelllevel != null) {
+              characterData.spells.push({
               spellName: row.spellname,
               spellDescription: row.spelldescription,
               spellLevel: row.spelllevel
-            });
+              });
+            }
           });
 
           resolve();
