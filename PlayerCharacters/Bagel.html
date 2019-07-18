@@ -2,6 +2,7 @@
 <html lang="en">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="./CharacterInfo.js"></script>
+    <script src="./DndFunctionality.js"
     <script type="text/javascript">
         getCharacterInfo('Bagel');
     </script>
@@ -54,4 +55,17 @@
             <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
         </form>
     </div>
+
+    <button id="d20" onclick="roll(20)">d20</button>
+    <h3 id="result_d20"></h3>
+    <button id="d12" onclick="roll(12)">d12</button>
+    <h3 id="result_d12"></h3>
+    <button id="d10" onclick="roll(10)">d10</button>
+    <h3 id="result_d10"></h3>
+    <button id="d8" onclick="roll(8)">d8</button>
+    <h3 id="result_d8"></h3>
+    <button id="d6" onclick="roll(6)">d6</button>
+    <h3 id="result_d6"></h3>
+    <button id="d4" onclick="roll(4)">d4</button>
+    <h3 id="result_d4"></h3>
 </html>
