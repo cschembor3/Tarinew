@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./CharacterInfo.js"></script>
+    <script type="text/javascript">
+        getCharacterInfo('Bagel');
+    </script>
+    <head>
+        <h1>Bagel</h1>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./Characters.css"/>
+    </head>
+    <h3>Race: Halfling</h3>
+    <h3>Class: Bard</h3>
+    <h3 id="level">Level: </h3>
+    
+    <h3>Spells</h3>
+    <table id="spellsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Level</th>
+        </tr>
+    </table>
+    <button id="addSpell" onclick="openSpellsForm()">Add spell</button>
+    <div id="spellInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addSpell('Bagel')">
+            <label for="name">Spell Name</label>
+            <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
+            <label for="description">Spell Description</label>
+            <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
+            <label for="level">Spell Level</label>
+            <input type="number" id="spellLevel" name="level" required>
+            <button type="submit" class="btn">Add Spell</button>
+            <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
+        </form>
+    </div>
+
+    <h3>Items</h3>
+    <table id="itemsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </table>
+    <button id="addItem" onclick="openItemsForm()">Add item</button>
+    <div id="itemInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addItem('Bagel')">
+            <label for="name">Item Name</label>
+            <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
+            <label for="description">Item Description</label>
+            <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
+            <button type="submit" class="btn">Add Item</button>
+            <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
+        </form>
+    </div>
+</html>
