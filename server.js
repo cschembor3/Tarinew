@@ -125,9 +125,9 @@ app.get('/players/:playerId', async function(req, res, next) {
           characterData.spells = [];
           data.forEach(rows => {
             spells.push({
-              spellName: rows.spellName,
-              spellDescription: row.spellDescription,
-              spellLevel: row.spellLevel
+              spellName: rows.spellname,
+              spellDescription: row.spelldescription,
+              spellLevel: row.spelllevel
             });
           });
 
@@ -139,7 +139,7 @@ app.get('/players/:playerId', async function(req, res, next) {
       pool.query(
         'SELECT * ' + 
         'FROM items ' +
-        'WHERE items.characternamne = $1',
+        'WHERE items.charactername = $1',
         [playerId], (error, response) => {
           if (error) {
             reject();
@@ -150,8 +150,8 @@ app.get('/players/:playerId', async function(req, res, next) {
           characterData.items = [];
           data.forEach(rows => {
             items.push({
-              itemName: row.itemName,
-              itemDescription: row.itemDescription
+              itemName: row.itemname,
+              itemDescription: row.itemdescription
             });
           });
 
