@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./CharacterInfo.js"></script>
+    <script src="./DndFunctionality.js"
+    <script type="text/javascript">
+        getCharacterInfo('Ivet');
+    </script>
+    <head>
+        <h1>Ivet</h1>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./Characters.css"/>
+    </head>
+    <h3>Race: Dwarf</h3>
+    <h3>Class: Cleric</h3>
+    <h3 id="level">Level: </h3>
+    
+    <h3>Spells</h3>
+    <table id="spellsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Level</th>
+        </tr>
+    </table>
+    <button id="addSpell" onclick="openSpellsForm()">Add spell</button>
+    <div id="spellInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addSpell('Ivet')">
+            <label for="name">Spell Name</label>
+            <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
+            <label for="description">Spell Description</label>
+            <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
+            <label for="level">Spell Level</label>
+            <input type="number" id="spellLevel" name="level" required>
+            <button type="submit" class="btn">Add Spell</button>
+            <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
+        </form>
+    </div>
+
+    <h3>Items</h3>
+    <table id="itemsTable">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </table>
+    <button id="addItem" onclick="openItemsForm()">Add item</button>
+    <div id="itemInfoForm" class="form-popup">
+        <form class="form-container" onsubmit="return addItem('Ivet')">
+            <label for="name">Item Name</label>
+            <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
+            <label for="description">Item Description</label>
+            <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
+            <button type="submit" class="btn">Add Item</button>
+            <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
+        </form>
+    </div>
+
+    <button id="d20" onclick="roll(20)">d20</button>
+    <h3 id="result_d20"></h3>
+    <button id="d12" onclick="roll(12)">d12</button>
+    <h3 id="result_d12"></h3>
+    <button id="d10" onclick="roll(10)">d10</button>
+    <h3 id="result_d10"></h3>
+    <button id="d8" onclick="roll(8)">d8</button>
+    <h3 id="result_d8"></h3>
+    <button id="d6" onclick="roll(6)">d6</button>
+    <h3 id="result_d6"></h3>
+    <button id="d4" onclick="roll(4)">d4</button>
+    <h3 id="result_d4"></h3>
+</html>
