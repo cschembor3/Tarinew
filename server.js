@@ -105,9 +105,9 @@ app.get('/players/:playerId', async function(req, res, next) {
       pool.query(
         'SELECT * ' +
         'FROM character_info_table ' +
-        'INNER JOIN spells ' + 
+        'FULL OUTER JOIN spells ' + 
         'ON spells.charactername = character_info_table.name ' +
-        'WHERE spells.charactername = $1',
+        'WHERE character_info_table.name = $1',
         [playerId], (error, response) => {
           if (error) {
             reject();
