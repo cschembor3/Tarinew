@@ -124,7 +124,7 @@ app.get('/players/:playerId', async function(req, res, next) {
 
           characterData.spells = [];
           data.forEach(rows => {
-            spells.push({
+            characterData.spells.push({
               spellName: rows.spellname,
               spellDescription: row.spelldescription,
               spellLevel: row.spelllevel
@@ -149,7 +149,7 @@ app.get('/players/:playerId', async function(req, res, next) {
           const data = response.rows;
           characterData.items = [];
           data.forEach(rows => {
-            items.push({
+            characterData.items.push({
               itemName: row.itemname,
               itemDescription: row.itemdescription
             });
