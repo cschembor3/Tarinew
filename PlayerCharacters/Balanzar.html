@@ -8,21 +8,32 @@
             function(data) {
                 data = JSON.stringify(data);
                 const playerObj = JSON.parse(data);
-                document.getElementById('level').append(playerObj.result.player.level);
+                document.getElementById('level').append(playerObj.characterInfo.level);
                 
                 const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
-                const spells = playerObj.result.spells;
+                const spells = playerObj.spells;
                 const spellTable = document.getElementById('spellsTable');
                 spells.forEach(spell => {
                     const row = spellTable.insertRow();
                     const nameCell = row.insertCell(0);
-                    const formattedSpellName = spell.spellname.replace(' ', '-');
-                    nameCell.innerHTML = '<a href="' + dndBeyondSpells + formattedSpellName + '" target="_blank">' + spell.spellname + '</a>';
+                    const formattedSpellName = spell.spellName.replace(/ /g, '-');
+                    nameCell.innerHTML = '<a href="' + dndBeyondSpells + formattedSpellName + '" target="_blank">' + spell.spellName + '</a>';
                     const descCell = row.insertCell(1);
-                    descCell.innerHTML = spell.spelldescription;
+                    descCell.innerHTML = spell.spellDescription;
                     const levelCell = row.insertCell(2);
-                    levelCell.innerHTML = spell.spelllevel;
+                    levelCell.innerHTML = spell.spellLevel;
                 });
+
+                const dndBeyondItems = 'https://www.dndbeyond.com/magic-items/';
+                const items = playerObj.items;
+                const itemsTable = document.getElementById('itemsTable');
+                items.forEach(item => {
+                    const row = itemsTable.insertRow();
+                    const nameCell = row.insertCell(0);
+                    nameCell.innerHTML = item.itemName;
+                    const descCell = row.insertCell(1);
+                    descCell.innerHTML = item.itemDescription;
+                })
             });
     </script>
     <head>
