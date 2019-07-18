@@ -101,81 +101,72 @@ app.get('/players/:playerId', async function(req, res, next) {
   const playerId = req.params.playerId;
   let characterData = {};
   try {
-    const dbQuery = await new Promise(function(resolve, reject) {
+    const spellsQueryPromise = new Promise(function(resolve, reject) {
       pool.query(
         'SELECT * ' +
-        'FROM character_info_table, items, spells ' +
-        'WHERE character_info_table.name = $1 AND items.charactername = $1 AND spells.charactername = $1',
+        'FROM character_info_table ' +
+        'INNER JOIN spells ' + 
+        'ON spells.charactername = character_info_table.name ' +
+        'WHERE spells.charactername = $1',
         [playerId], (error, response) => {
           if (error) {
             reject();
             res.send(error);
           }
   
-          characterData = constructResponse(response);
+          const data = response.rows;
+          characterData.characterInfo = {
+            name: data[0].name,
+            race: data[0].race,
+            class: data[0].class,
+            level: data[0].level
+          };
+
+          characterData.spells = [];
+          data.forEach(rows => {
+            spells.push({
+              spellName: rows.spellName,
+              spellDescription: row.spellDescription,
+              spellLevel: row.spellLevel
+            });
+          });
+
           resolve();
         });
     });
 
-    res.json(characterData);
+    const itemsQueryPromise = new Promise(function(resolve, reject) {
+      pool.query(
+        'SELECT * ' + 
+        'FROM items ' +
+        'WHERE items.characternamne = $1',
+        [playerId], (error, response) => {
+          if (error) {
+            reject();
+            res.send(error);
+          }
+
+          const data = response.rows;
+          characterData.items = [];
+          data.forEach(rows => {
+            items.push({
+              itemName: row.itemName,
+              itemDescription: row.itemDescription
+            });
+          });
+
+          resolve();
+        }
+      );
+    });
+
+    Promise.all([spellsQueryPromise, itemsQueryPromise]).then(function() {
+      res.json(characterData);
+    });
   } catch (err) {
     console.error(err);
     res.send('Error ' + err);
   }
 });
-
-/*
- * Construct the player information API response
- */
-function constructResponse (dbResponse) {
-  const apiResponse = {};
-  const data = dbResponse.rows;
-
-  // Map character information
-  apiResponse.characterInfo = {
-    name: data[0].name,
-    race: data[0].race,
-    class: data[0].class,
-    level: data[0].level
-  };
-
-  // Map spells and items
-  const spells = [];
-  const items = [];
-  data.forEach(row => {
-    const spellName = row.spellname;
-    const spellDescription = row.spelldescription;
-    const spellLevel = row.spelllevel;
-
-    const itemName = row.itemname;
-    const itemDescription = row.itemdescription;
-
-    // only map spell if all information is there
-    if (spellName != null && spellDescription != null && spellLevel != null) {
-      spells.push(
-        {
-          spellName: spellName,
-          spellDescription: spellDescription,
-          spellLevel: spellLevel
-        });
-    }
-
-    // only map item if all information is there
-    if (itemName != null && itemDescription != null) {
-      items.push(
-        {
-          itemName: itemName,
-          itemDescription: itemDescription
-        });
-    }
-  });
-
-  apiResponse.spells = spells;
-  apiResponse.items = items;
-
-  return apiResponse;
-}
-
-
 
 http.createServer(app).listen(port);
