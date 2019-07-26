@@ -38,6 +38,18 @@ function getCharacterInfo(characterName) {
 }
 
 /*
+ * Add a description for the specified character to the database
+ */
+function addDescription(characterName, description) {
+    const characterDescription = $(description).val();
+    $.post(
+        'https://boiling-sea-30343.herokuapp.com/players/' + characterName + '/description',
+        {
+            characterDescription: characterDescription
+        });
+}
+
+/*
  * Add an item to the table and database
  */
 function addItem(characterName) {

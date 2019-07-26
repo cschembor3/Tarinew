@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="./CharacterInfo.js"></script>
-    <script src="./DndFunctionality.js"
+    <script src="./DndFunctionality.js"></script>
     <script type="text/javascript">
         getCharacterInfo('Ivet');
     </script>
@@ -14,6 +16,16 @@
     <h3>Race: Dwarf</h3>
     <h3>Class: Cleric</h3>
     <h3 id="level">Level: </h3>
+    <textarea id="description" class="descriptionArea" rows="6" placeholder="Character description"></textarea>
+    <div id="diceRollArea" class="dice-roll">
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 10)"><img src="./Icons/d10.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 8)"><img src="./Icons/d8.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
+    </div>
+    <button class="btn addDesc" onclick="addDescription('Ivet', this)">Save</button>
     
     <h3>Spells</h3>
     <table id="spellsTable">
@@ -23,7 +35,7 @@
             <th>Level</th>
         </tr>
     </table>
-    <button id="addSpell" onclick="openSpellsForm()">Add spell</button>
+    <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
     <div id="spellInfoForm" class="form-popup">
         <form class="form-container" onsubmit="return addSpell('Ivet')">
             <label for="name">Spell Name</label>
@@ -44,7 +56,7 @@
             <th>Description</th>
         </tr>
     </table>
-    <button id="addItem" onclick="openItemsForm()">Add item</button>
+    <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
     <div id="itemInfoForm" class="form-popup">
         <form class="form-container" onsubmit="return addItem('Ivet')">
             <label for="name">Item Name</label>
@@ -55,17 +67,4 @@
             <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
         </form>
     </div>
-
-    <button id="d20" onclick="roll(20)">d20</button>
-    <h3 id="result_d20"></h3>
-    <button id="d12" onclick="roll(12)">d12</button>
-    <h3 id="result_d12"></h3>
-    <button id="d10" onclick="roll(10)">d10</button>
-    <h3 id="result_d10"></h3>
-    <button id="d8" onclick="roll(8)">d8</button>
-    <h3 id="result_d8"></h3>
-    <button id="d6" onclick="roll(6)">d6</button>
-    <h3 id="result_d6"></h3>
-    <button id="d4" onclick="roll(4)">d4</button>
-    <h3 id="result_d4"></h3>
 </html>

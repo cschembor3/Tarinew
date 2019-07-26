@@ -1,3 +1,7 @@
+body {
+    margin: 3%;
+}
+
 table, th, td {
     border: 1px solid #ddd;
     border-collapse: collapse;
@@ -8,13 +12,8 @@ a:link {
     text-decoration: none;
 }
 
-button {
-    border: 1px solid #ddd;
-    padding: 12px;
-}
-
-button:active {
-    background-color: gray;
+.btn.dice {
+    width: 25%;
 }
 
 .form-popup {
@@ -44,4 +43,22 @@ button:active {
 
 .form-container .cancel {
     background-color: lightcoral;
+}
+
+.dice-roll {
+    display: flex;
+    float: right;
+}
+
+.roll-results {
+    display: flex;
+    float: right;
+}
+
+.descriptionArea {
+    width: 40%;
+}
+
+.btn.addDesc {
+    position: relative;
 }

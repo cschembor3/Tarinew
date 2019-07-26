@@ -95,6 +95,31 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
 });
 
 /*
+ * Add/update a character's description
+ */
+app.post('/players/:playerId/description', async function(req, res, next) {
+  const playerId = req.params.playerId;
+  const description = req.body.description;
+  try {
+    await pool.query(
+      'UPDATE character_info_table ' +
+      'SET description = ($1) ' +
+      'WHERE name = ($2)'
+      [description, playerId],
+      (error, response) => {
+        if (error) {
+          res.send('Error: ' + error);
+        }
+
+        res.status(200).end();
+      });
+  }
+  catch (err) {
+    res.send('Error: ' + err);
+  }
+});
+
+/*
  * Gets the character information for the given id
  */
 app.get('/players/:playerId', async function(req, res, next) {
@@ -119,7 +144,8 @@ app.get('/players/:playerId', async function(req, res, next) {
             name: data[0].name,
             race: data[0].race,
             class: data[0].class,
-            level: data[0].level
+            level: data[0].level,
+            description: data[0].description
           };
 
           characterData.spells = [];
@@ -145,9 +171,9 @@ app.get('/players/:playerId', async function(req, res, next) {
         [playerId], (error, response) => {
           if (error) {
             reject();
+
             res.send(error);
           }
-
           const data = response.rows;
           characterData.items = [];
           data.forEach(row => {

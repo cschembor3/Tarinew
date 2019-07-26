@@ -1,8 +1,14 @@
 /*
+ * Initialize all dice buttons
+ */
+$(function() {
+    $('.btn.dice').popover();
+});
+
+/*
  * Simulate the roll of a die
  */
-function roll(num) {
+function roll(btn, num) {
     const rollResult = Math.ceil(Math.random() * num);
-    const resultHeader = document.getElementById('result_d' + num);
-    resultHeader.innerHTML = rollResult;
+    $(btn).attr('data-content', rollResult);
 }
