@@ -99,7 +99,7 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
  */
 app.post('/players/:playerId/description', async function(req, res, next) {
   const playerId = req.params.playerId;
-  const description = req.body.description;
+  const description = req.body.characterDescription;
   try {
     await pool.query(
       'UPDATE character_info_table ' +
@@ -111,7 +111,7 @@ app.post('/players/:playerId/description', async function(req, res, next) {
           res.send('Error: ' + error);
         }
 
-        res.status(200).end();
+        res.status(201).end();
       });
   }
   catch (err) {
