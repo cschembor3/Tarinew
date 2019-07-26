@@ -41,7 +41,7 @@ function getCharacterInfo(characterName) {
  * Add a description for the specified character to the database
  */
 function addDescription(characterName, description) {
-    const characterDescription = $(description).val();
+    const characterDescription = $('.btn.addDesc').val();
     $.post(
         'https://boiling-sea-30343.herokuapp.com/players/' + characterName + '/description',
         {
