@@ -108,7 +108,7 @@ app.post('/players/:playerId/description', async function(req, res, next) {
       [description, playerId],
       (error, response) => {
         if (error) {
-          res.send('Error: ' + error);
+          res.send('Error: ' + playerId + description + error);
         }
 
         res.status(201).end();
