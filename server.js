@@ -100,7 +100,6 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
 app.post('/players/:playerId/description', async function(req, res, next) {
   const playerId = req.params.playerId;
   const description = req.body.characterDescription;
-  res.send(description);
   try {
     await pool.query(
       'UPDATE character_info_table ' +
