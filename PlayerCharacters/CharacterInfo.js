@@ -10,6 +10,7 @@ function getCharacterInfo(characterName) {
             data = JSON.stringify(data);
             const playerObj = JSON.parse(data);
             document.getElementById('level').append(playerObj.characterInfo.level);
+            $('#description').val(playerObj.characterInfo.description);
             const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
             const spells = playerObj.spells;
             const spellTable = document.getElementById('spellsTable');
