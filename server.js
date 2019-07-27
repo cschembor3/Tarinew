@@ -103,8 +103,8 @@ app.post('/players/:playerId/description', async function(req, res, next) {
   try {
     await pool.query(
       'UPDATE character_info_table ' +
-      'SET description = test ' +
-      'WHERE name = ($1)',
+      'SET description = "test" ' +
+      'WHERE name = "Soveliss"',
       [description, playerId],
       (error, response) => {
         if (error) {
