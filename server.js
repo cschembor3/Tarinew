@@ -80,7 +80,7 @@ app.post('/players/:playerId/spells', async function(req, res, next) {
   try {
     await pool.query(
       'INSERT INTO spells ' +
-      '(spellname, description, spelllevel, charactername) VALUES ($1, $2, $3, $4)',
+      '(spellname, spelldescription, spelllevel, charactername) VALUES ($1, $2, $3, $4)',
       [spellName, spellDescription, spellLevel, playerId],
       (error, response) => {
         if (error) {
@@ -130,7 +130,7 @@ app.get('/players/:playerId', async function(req, res, next) {
       pool.query(
         'SELECT * ' +
         'FROM character_info_table ' +
-        'FULL OUTER JOIN spells ' + 
+        'FULL OUTER JOIN spells ' +
         'ON spells.charactername = character_info_table.name ' +
         'WHERE character_info_table.name = $1',
         [playerId], (error, response) => {
@@ -138,7 +138,7 @@ app.get('/players/:playerId', async function(req, res, next) {
             reject();
             res.send(error);
           }
-  
+
           const data = response.rows;
           characterData.characterInfo = {
             name: data[0].name,
@@ -165,7 +165,7 @@ app.get('/players/:playerId', async function(req, res, next) {
 
     const itemsQueryPromise = new Promise(function(resolve, reject) {
       pool.query(
-        'SELECT * ' + 
+        'SELECT * ' +
         'FROM items ' +
         'WHERE items.charactername = $1',
         [playerId], (error, response) => {
