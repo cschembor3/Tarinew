@@ -39,7 +39,7 @@
     </table>
     <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
     <div id="spellInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addSpell()">
+        <form class="form-container" onsubmit="return addSpell('Balanzar')">
             <label for="name">Spell Name</label>
             <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
             <label for="description">Spell Description</label>
@@ -60,7 +60,7 @@
     </table>
     <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
     <div id="itemInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addItem()">
+        <form class="form-container" onsubmit="return addItem('Balanzar')">
             <label for="name">Item Name</label>
             <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
             <label for="description">Item Description</label>
@@ -69,4 +69,7 @@
             <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
         </form>
     </div>
+
+    <div class="spinner"></div>
+    <div class="page greyout"</div>
 </html>

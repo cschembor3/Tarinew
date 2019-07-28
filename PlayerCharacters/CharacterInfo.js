@@ -4,6 +4,8 @@ const playersEndpoint = 'https://boiling-sea-30343.herokuapp.com/players/';
  * Get the character info, and populate the tables
  */
 function getCharacterInfo(characterName) {
+    $('.spinner').show();
+    $('.page.greyout').fadeTo("fast", 0.5);
     $.get(
         playersEndpoint + characterName,
         function(data) {
@@ -36,6 +38,9 @@ function getCharacterInfo(characterName) {
             });
         }
     );
+
+    $('.spinner').hide();
+    $('.page.greyout').fadeTo("fast", 1);
 }
 
 /*
@@ -64,7 +69,7 @@ function addItem(characterName) {
             itemName: itemName,
             itemDescription: itemDescription
         });
-    
+
     closeItemsForm();
     return false;
 }
@@ -85,7 +90,7 @@ function addSpell(characterName) {
             spellDescription: spellDescription,
             spellLevel: spellLevel
         });
-    
+
     closeSpellsForm();
     return false;
 }
