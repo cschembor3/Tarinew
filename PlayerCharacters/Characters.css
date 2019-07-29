@@ -63,18 +63,24 @@ a:link {
     position: relative;
 }
 
+.btn.homepageLink {
+    display: flex;
+    float: right;
+}
+
 .spinner {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   animation: spin 2s linear infinite;
   top: 50%;
   right: 50%;
   z-index: 1;
   position: absolute;
-  visibility: hidden;
+  display: 'none';
+  background-image: url('../sword.png');
 }
 
 @keyframes spin {
@@ -83,6 +89,12 @@ a:link {
 }
 
 .page.greyout {
-    width: 100%;
-    height: 100%;
+    background-color: black;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    opacity: 0.5;
+    display: 'none';
 }
