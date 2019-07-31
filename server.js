@@ -23,14 +23,6 @@ app.use(function(req, res, next) {
 });
 
 /*
- * Serve the homepage html
- */
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
-
-
-/*
  * Inserts the character information into the database
  */
 app.post('/', async function (req, res, next) {
