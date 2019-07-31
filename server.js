@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const { Pool } = require('pg');
+const path = require('path');
 
 const app = express();
 const pool = new Pool({
@@ -20,6 +21,14 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+/*
+ * Serve the homepage html
+ */
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
 
 /*
  * Inserts the character information into the database

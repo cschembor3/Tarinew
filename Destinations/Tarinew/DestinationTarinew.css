@@ -1,3 +1,7 @@
+body {
+    margin: 3%;
+}
+
 table, th, td {
     border: 1px solid #ddd;
     border-collapse: collapse;
