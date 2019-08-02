@@ -11,3 +11,12 @@ table, th, td {
 a:link {
     text-decoration: none;
 }
+
+h1 {
+    font-size: 50px;
+    font-family: 'IM Fell English SC', cursive;
+}
+
+h3 {
+    font-family: 'Almendra Display', cursive;
+}
