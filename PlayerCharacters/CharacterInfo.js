@@ -1,4 +1,6 @@
 const playersEndpoint = 'https://boiling-sea-30343.herokuapp.com/players/';
+const localEndpoint = 'http://localhost:12345/players/'
+const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
 
 /*
  * Get the character info, and populate the tables
@@ -7,15 +9,16 @@ function getCharacterInfo(characterName) {
     $('.spinner').show();
     $('.page.greyout').fadeIn();
     $.get(
-        playersEndpoint + characterName,
+        localEndpoint + characterName,
         function(data) {
             data = JSON.stringify(data);
             const playerObj = JSON.parse(data);
             document.getElementById('level').append(playerObj.characterInfo.level);
-            $('#description').val(playerObj.characterInfo.description);
-            const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
+            $('#description').html(playerObj.characterInfo.description);
+            populateCharacterStats(playerObj.characterInfo.stats);
             const spells = playerObj.spells;
             const spellTable = document.getElementById('spellsTable');
+            $('spellTable').empty();
             spells.forEach(spell => {
                 const row = spellTable.insertRow();
                 const nameCell = row.insertCell(0);
@@ -29,6 +32,7 @@ function getCharacterInfo(characterName) {
 
             const items = playerObj.items;
             const itemsTable = document.getElementById('itemsTable');
+            $('itemsTable').empty();
             items.forEach(item => {
                 const row = itemsTable.insertRow();
                 const nameCell = row.insertCell(0);
@@ -44,12 +48,25 @@ function getCharacterInfo(characterName) {
 }
 
 /*
+ * Populates the htmlues in the character stats table using the values
+ * from the db response
+ */
+function populateCharacterStats(stats) {
+    $('#strengthVal').html(stats.strength);
+    $('#dexVal').html(stats.dexterity);
+    $('#constVal').html(stats.constitution);
+    $('#intVal').html(stats.intelligence);
+    $('#wisVal').html(stats.wisdom);
+    $('#charVal').html(stats.charisma);
+}
+
+/*
  * Add a description for the specified character to the database
  */
 function addDescription(characterName, description) {
     const characterDescription = $('#description').val();
     $.post(
-        'https://boiling-sea-30343.herokuapp.com/players/' + characterName + '/description',
+        localEndpoint + characterName + '/description',
         {
             characterDescription: characterDescription
         });
@@ -64,7 +81,7 @@ function addItem(characterName) {
     const itemDescription = $('#itemDescription').val();
     addElementToTable(table, itemName, itemDescription);
     $.post(
-        'https://boiling-sea-30343.herokuapp.com/players/' + characterName + '/items',
+        localEndpoint + characterName + '/items',
         {
             itemName: itemName,
             itemDescription: itemDescription
@@ -84,7 +101,7 @@ function addSpell(characterName) {
     const spellLevel = $('#spellLevel').val();
     addElementToTable(table, spellName, spellDescription, spellLevel);
     $.post(
-        'https://boiling-sea-30343.herokuapp.com/players/' + characterName + '/spells',
+        localEndpoint + characterName + '/spells',
         {
             spellName: spellName,
             spellDescription: spellDescription,

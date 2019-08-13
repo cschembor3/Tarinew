@@ -10,7 +10,6 @@
     </script>
     <head>
         <button type="button" class="btn homepageLink" onclick="location.href = '../index.html'">Home</button>
-
         <h1>Balanzar</h1>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Characters.css"/>
@@ -18,15 +17,74 @@
     <h3>Race: Dragonborn</h3>
     <h3>Class: Rogue</h3>
     <h3 id="level">Level: </h3>
+
     <textarea id="description" class="descriptionArea" rows="6" placeholder="Character description"></textarea>
-    <div id="diceRollArea" class="dice-roll">
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 10)"><img src="./Icons/d10.png"></button>
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 8)"><img src="./Icons/d8.png"></button>
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
-        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
+
+    <div class="gameplay-info">
+        <!-- Character sheet stats here -->
+        <div class="stats">
+            <table id="table-charSheet" class="table borded table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Stat</th>
+                        <th scope="col">Val</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Strength</td>
+                        <td id="strengthVal">
+                            <input type="number" class="edited-val" id="edited-strength-val"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dexterity</td>
+                        <td id="dexVal">
+                            <input type="number" class="edited-val" id="edited-dex-val"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Constitution</td>
+                        <td id="constVal">
+                            <input type="number" class="edited-val" id="edited-const-val"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Intelligence</td>
+                        <td id="intVal">
+                            <input type="number" class="edited-val" id="edited-int-val"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wisdom</td>
+                        <td id="wisVal">
+                            <input type="number" class="edited-val" id="edited-wis-val"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Charisma</td>
+                        <td id="charVal">
+                            <input type="number" class="edited-val" id="edited-char-val"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-edit-btns">
+                <button class="btn edit">Edit</button>
+                <button class="btn save">Save</button>
+            </div>
+        </div>
+
+        <div id="diceRollArea" class="dice-roll">
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 10)"><img src="./Icons/d10.png"></button>
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 8)"><img src="./Icons/d8.png"></button>
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
+            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
+        </div>
     </div>
+
     <button class="btn addDesc" onclick="addDescription('Balanzar', 'description')">Save</button>
     
     <h3>Spells</h3>

@@ -6,11 +6,11 @@ const path = require('path');
 
 const app = express();
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
+  connectionString: process.env.DATABASE_URL
+  //ssl: true
 });
 
-const port = process.env.PORT || 12345;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -146,7 +146,15 @@ app.get('/players/:playerId', async function(req, res, next) {
             race: data[0].race,
             class: data[0].class,
             level: data[0].level,
-            description: data[0].description
+            description: data[0].description,
+            stats: {
+              strength: data[0].strength,
+              dexterity: data[0].dexterity,
+              constitution: data[0].constitution,
+              intelligence: data[0].intelligence,
+              wisdom: data[0].wisdom,
+              charisma: data[0].charisma
+            }
           };
 
           characterData.spells = [];

@@ -6,6 +6,11 @@ table, th, td {
     border: 1px solid #ddd;
     border-collapse: collapse;
     padding: 12px;
+    max-width: 40%;
+}
+
+#table-charSheet {
+    margin-bottom: 0px;
 }
 
 a:link {
@@ -45,18 +50,45 @@ a:link {
     background-color: lightcoral;
 }
 
-.dice-roll {
+.desc-area {
     display: flex;
-    float: right;
-}
-
-.roll-results {
-    display: flex;
-    float: right;
+    flex-direction: column;
 }
 
 .descriptionArea {
     width: 40%;
+}
+
+.gameplay-info {
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    flex-direction: column;
+}
+
+.dice-roll {
+    float: right;
+    display: flex;
+}
+
+.stats {
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-edit-btns {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.btn.save {
+    display: flex;
+}
+
+.btn.edit {
+    display: flex;
 }
 
 .btn.addDesc {
