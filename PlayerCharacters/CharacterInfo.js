@@ -60,8 +60,6 @@ function populateCharacterStats(stats) {
     $('#intVal').html(stats.intelligence);
     $('#wisVal').html(stats.wisdom);
     $('#charVal').html(stats.charisma);
-=======
->>>>>>> 86949eb6a20137de2bf3c2056d90b54bb9495a3c
 }
 
 /*
