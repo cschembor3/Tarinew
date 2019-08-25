@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const { Pool } = require('pg');
-const path = require('path');
 
 const app = express();
 const pool = new Pool({
@@ -119,6 +118,17 @@ app.post('/players/:playerId/description', async function(req, res, next) {
     res.send('Error: ' + err);
   }
 });
+
+app.post('/players/:playerid/stats', async function(req, res, next) {
+  const playerId = req.params.playerId;
+  const playerStats = req.body.stats;
+  try {
+    await pool.query(
+      'UPDATE character_info_table ' +
+      'SET '
+    )
+  }
+})
 
 /*
  * Gets the character information for the given id

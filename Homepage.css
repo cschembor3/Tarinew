@@ -78,3 +78,12 @@ h1, h2 {
 h2 {
     padding-top: 5%;
 }
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+/*
+@media screen and (max-width: 600px) {
+    .dropdownBtn {
+        max-width: 100%;
+    }
+}
+*/
