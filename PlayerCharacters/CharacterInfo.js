@@ -55,11 +55,17 @@ function getCharacterInfo(characterName) {
  */
 function populateCharacterStats(stats) {
     $('#strengthVal').html(stats.strength);
+    $('#strengthMod').html(calculateModifier(stats.strength));
     $('#dexVal').html(stats.dexterity);
+    $('#dexMod').html(calculateModifier(stats.dexterity));
     $('#constVal').html(stats.constitution);
+    $('#constMod').html(calculateModifier(stats.constitution));
     $('#intVal').html(stats.intelligence);
+    $('#intMod').html(calculateModifier(stats.intelligence));
     $('#wisVal').html(stats.wisdom);
+    $('#wisMod').html(calculateModifier(stats.wisdom));
     $('#charVal').html(stats.charisma);
+    $('#charMod').html(calculateModifier(stats.charisma));
 }
 
 /*

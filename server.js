@@ -119,6 +119,7 @@ app.post('/players/:playerId/description', async function(req, res, next) {
   }
 });
 
+/*
 app.post('/players/:playerid/stats', async function(req, res, next) {
   const playerId = req.params.playerId;
   const playerStats = req.body.stats;
@@ -129,6 +130,7 @@ app.post('/players/:playerid/stats', async function(req, res, next) {
     )
   }
 })
+*/
 
 /*
  * Gets the character information for the given id
