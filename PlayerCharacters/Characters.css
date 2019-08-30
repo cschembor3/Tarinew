@@ -50,31 +50,40 @@ a:link {
     background-color: lightcoral;
 }
 
-.desc-area {
-    display: flex;
-    flex-direction: column;
-}
-
 .descriptionArea {
-    width: 40%;
+    width: 100%;
 }
 
-.gameplay-info {
+.character.goods {
     display: flex;
-    justify-content: flex-end;
-    float: right;
+    flex-direction: column;
+    width: 50%;
+    margin-right: 5%;
+}
+
+.character.info {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.spell.info {
+    display: flex;
     flex-direction: column;
 }
 
-.dice-roll {
-    float: right;
+.item.info {
     display: flex;
+    flex-direction: column;
 }
 
 .stats {
-    float: right;
+    width: 50%;
+    margin-left: 5%;
+}
+
+.dice-roll {
+    float: center;
     display: flex;
-    flex-direction: column;
 }
 
 .table-edit-btns {

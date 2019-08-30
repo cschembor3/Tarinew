@@ -20,11 +20,13 @@
     <h3 id="level">Level: </h3>
 
     <textarea id="description" class="descriptionArea" rows="6" placeholder="Character description"></textarea>
+    <button class="btn addDesc" onclick="addDescription('Balanzar', 'description')">Save</button>
 
-    <div class="gameplay-info">
+    <div class="character info">
         <!-- Character sheet stats here -->
         <div class="stats">
-            <table id="table-charSheet" class="table borded table-striped table-responsive">
+            <h3>Stats</h3>
+            <table id="table-charSheet" class="table borded table-striped table-responsive" width="40%">
                 <thead>
                     <tr>
                         <th scope="col">Stat</th>
@@ -94,58 +96,73 @@
                 <button class="btn save">Save</button>
             </div>
         </div>
-
-        <div id="diceRollArea" class="dice-roll">
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 10)"><img src="./Icons/d10.png"></button>
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 8)"><img src="./Icons/d8.png"></button>
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
-            <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
+        
+        <div class="character goods">
+            <div>
+                <div class="spell info">
+                    <div>
+                        <h3>Spells</h3>
+                        <table id="spellsTable" class="table borded table-striped table-responsive">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Level</th>
+                            </tr>
+                        </table>
+                        <div id="spellInfoForm" class="form-popup">
+                            <form class="form-container" onsubmit="return addSpell('Balanzar')">
+                                <label for="name">Spell Name</label>
+                                <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
+                                <label for="description">Spell Description</label>
+                                <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
+                                <label for="level">Spell Level</label>
+                                <input type="number" id="spellLevel" name="level" required>
+                                <button type="submit" class="btn">Add Spell</button>
+                                <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item info">
+                    <div>
+                        <h3>Items</h3>
+                        <table id="itemsTable" class="table borded table-striped table-responsive">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </table>
+                        <div id="itemInfoForm" class="form-popup">
+                            <form class="form-container" onsubmit="return addItem('Balanzar')">
+                                <label for="name">Item Name</label>
+                                <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
+                                <label for="description">Item Description</label>
+                                <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
+                                <button type="submit" class="btn">Add Item</button>
+                                <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <button class="btn addDesc" onclick="addDescription('Balanzar', 'description')">Save</button>
-    
-    <h3>Spells</h3>
-    <table id="spellsTable">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Level</th>
-        </tr>
-    </table>
-    <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
-    <div id="spellInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addSpell('Balanzar')">
-            <label for="name">Spell Name</label>
-            <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
-            <label for="description">Spell Description</label>
-            <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
-            <label for="level">Spell Level</label>
-            <input type="number" id="spellLevel" name="level" required>
-            <button type="submit" class="btn">Add Spell</button>
-            <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
-        </form>
-    </div>
-
-    <h3>Items</h3>
-    <table id="itemsTable">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-    </table>
-    <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
-    <div id="itemInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addItem('Balanzar')">
-            <label for="name">Item Name</label>
-            <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
-            <label for="description">Item Description</label>
-            <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
-            <button type="submit" class="btn">Add Item</button>
-            <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
-        </form>
+    <div id="diceRollArea" class="dice-roll">
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 10)"><img src="./Icons/d10.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 8)"><img src="./Icons/d8.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
+        <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
     </div>
 
     <div class="spinner"></div>
