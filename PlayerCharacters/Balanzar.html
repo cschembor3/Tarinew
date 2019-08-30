@@ -92,10 +92,44 @@
                 </tbody>
             </table>
             <div class="table-edit-btns">
-                <button class="btn edit">Edit</button>
-                <button class="btn save">Save</button>
+                <button class="btn edit" onclick="editStat('#table-charSheet tr td:nth-child(2)', '#table-charSheet')">Edit</button>
+                <button class="btn save" onclick="closeStatEditing('#table-charSheet tr td:nth-child(2)', '#table-charSheet')">Save</button>
             </div>
         </div>
+
+        <!--
+        <script type="text/javascript">
+            function editStat() {
+                $('#table-charSheet tr td:nth-child(2)').css(
+                    {
+                        "border": "1px red",
+                        "border-style": "double"
+                    }
+                );
+
+                const table = $("#table-charSheet");
+                const rows = table[0].rows;
+                for (i = 1; i < rows.length; i++) {
+                    const statValCell = rows[i].cells[1];
+                    statValCell.contentEditable = "true";
+                }
+            }
+
+            function closeStatEditing() {
+                $('#table-charSheet tr td:nth-child(2)').css(
+                    {
+                        "border": "1px solid #ddd",
+                        "border-style": "single"
+                    }
+                );
+                const rows = $("#table-charSheet")[0].rows;
+                for (i = 1; i < rows.length; i++) {
+                    const statValCell = rows[i].cells[1];
+                    statValCell.contentEditable = "false";
+                }
+            }
+        </script>
+        -->
         
         <div class="character goods">
             <div>

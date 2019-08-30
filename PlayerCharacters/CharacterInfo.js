@@ -120,6 +120,43 @@ function addSpell(characterName) {
     return false;
 }
 
+/*
+ * Makes the stats table 'stat' column editable 
+ */
+function editStat(statValElems, tableSelector) {
+    $(statValElems).css(
+        {
+            "border": "1px red",
+            "border-style": "double"
+        }
+    );
+
+    const table = $(tableSelector);
+    const rows = table[0].rows;
+    for (i = 1; i < rows.length; i++) {
+    const statValCell = rows[i].cells[1];
+    statValCell.contentEditable = "true";
+    }
+}
+
+/*
+ * Turns the stats table 'stat' column back to being un-editable
+ */
+function closeStatEditing(statValElems, tableSelector) {
+    $(statValElems).css(
+        {
+            "border": "1px solid #ddd",
+            "border-style": "single"
+        }
+    );
+
+    const rows = $(tableSelector)[0].rows;
+    for (i = 1; i < rows.length; i++) {
+        const statValCell = rows[i].cells[1];
+        statValCell.contentEditable = "false";
+    }
+}
+
 function addElementToTable(table, ...tableEntries) {
     const newRow = table.insertRow();
     tableEntries.forEach(entry => {
