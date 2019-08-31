@@ -122,35 +122,39 @@ app.post('/players/:playerId/description', async function(req, res, next) {
 /*
  * Update player stats
  */
-app.post('/players/:playerid/stats', async function(req, res, next) {
+app.post('/players/:playerId/stats', async function(req, res, next) {
   const playerId = req.params.playerId;
-  const playerStats = req.body.stats;
+  const strength = req.body.strength;
+  const dexterity = req.body.dexterity;
+  const constitution = req.body.constitution;
+  const intelligence = req.body.intelligence;
+  const wisdom = req.body.wisdom;
+  const charisma = req.body.charisma;
+
   try {
     await pool.query(
+      
       'UPDATE character_info_table ' +
-      'SET strength = $1 AND ' + 
-      'SET dexterity = $2 AND ' +
-      'SET constitution = $3 AND ' +
-      'SET intelligence = $4 AND ' +
-      'SET wisdom = $5 AND ' +
-      'SET charisma = $6 ' +
-      'WHERE name = $7',
+      'SET strength = ($1), ' + 
+      'dexterity = ($2), ' +
+      'constitution = ($3), ' +
+      'intelligence = ($4), ' +
+      'wisdom = ($5), ' +
+      'charisma = ($6) ' +
+      'WHERE name = ($7)',
       [
-        playerStats.strength,
-        playerStats.dexterity,
-        playerStats.constitution,
-        playerStats.intelligence,
-        playerStats.wisdom,
-        playerStats.charisma,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
         playerId
       ], (error, response) => {
-      res.send("good job");
         if (error) {
-          reject();
           res.send(error);
         }
 
-        res.send("howdy");
         res.status(200).end();
       }
     );
@@ -159,6 +163,7 @@ app.post('/players/:playerid/stats', async function(req, res, next) {
     res.send('Error: ' + err);
   }
 });
+
 
 /*
  * Gets the character information for the given id
