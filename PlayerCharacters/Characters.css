@@ -1,116 +1,119 @@
 body {
-    margin: 3%;
+  margin: 3%;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-    border-collapse: collapse;
-    padding: 12px;
-    max-width: 40%;
+table,
+th,
+td {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 12px;
+  max-width: 40%;
 }
 
 .btn {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .table {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 a:link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .btn.dice {
-    width: 25%;
+  width: 25%;
 }
 
 .form-popup {
-    display: none;
-    border: none;
-    padding: 10px 16px;
+  display: none;
+  border: none;
+  padding: 10px 16px;
 }
 
 .form-container {
-    background-color: white;
-    padding: 10px;
-    max-width: 450px;
+  background-color: white;
+  padding: 10px;
+  max-width: 450px;
 }
 
-.form-container input[type=text], input[type=number] {
-    width: 100%;
-    padding: 5px;
-    border: none;
-    background-color: #f1f1f1;
+.form-container input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  background-color: #f1f1f1;
 }
 
 .form-container .btn {
-    width: 100%;
-    padding: 12px;
-    background-color: lightgreen;
+  width: 100%;
+  padding: 12px;
+  background-color: lightgreen;
 }
 
 .form-container .cancel {
-    background-color: lightcoral;
+  background-color: lightcoral;
 }
 
 .descriptionArea {
-    width: 100%;
+  width: 100%;
 }
 
 .character.goods {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 5%;
 }
 
 .character.info {
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .spell.info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .item.info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .stats {
-    width: 50%;
-    margin-left: 5%;
+  width: 50%;
+  margin-left: 5%;
 }
 
 .dice-roll {
-    float: center;
-    display: flex;
+  float: center;
+  display: flex;
 }
 
 .table-edit-btns {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .btn.save {
-    display: flex;
+  display: flex;
 }
 
 .btn.edit {
-    display: flex;
+  display: flex;
 }
 
 .btn.addDesc {
-    position: relative;
+  position: relative;
 }
 
 .btn.homepageLink {
-    display: flex;
-    float: right;
+  display: flex;
+  float: right;
 }
 
 .spinner {
@@ -124,22 +127,26 @@ a:link {
   right: 50%;
   z-index: 1;
   position: absolute;
-  display: 'none';
-  background-image: url('../sword.png');
+  display: "none";
+  background-image: url("../sword.png");
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .page.greyout {
-    background-color: black;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    position: absolute;
-    opacity: 0.5;
-    display: 'none';
+  background-color: black;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  opacity: 0.5;
+  display: "none";
 }
