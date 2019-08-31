@@ -120,17 +120,45 @@ app.post('/players/:playerId/description', async function(req, res, next) {
 });
 
 /*
+ * Update player stats
+ */
 app.post('/players/:playerid/stats', async function(req, res, next) {
   const playerId = req.params.playerId;
   const playerStats = req.body.stats;
   try {
     await pool.query(
       'UPDATE character_info_table ' +
-      'SET '
-    )
+      'SET strength = $1 AND ' + 
+      'SET dexterity = $2 AND ' +
+      'SET constitution = $3 AND ' +
+      'SET intelligence = $4 AND ' +
+      'SET wisdom = $5 AND ' +
+      'SET charisma = $6 ' +
+      'WHERE name = $7',
+      [
+        playerStats.strength,
+        playerStats.dexterity,
+        playerStats.constitution,
+        playerStats.intelligence,
+        playerStats.wisdom,
+        playerStats.charisma,
+        playerId
+      ], (error, response) => {
+      res.send("good job");
+        if (error) {
+          reject();
+          res.send(error);
+        }
+
+        res.send("howdy");
+        res.status(200).end();
+      }
+    );
   }
-})
-*/
+  catch (err) {
+    res.send('Error: ' + err);
+  }
+});
 
 /*
  * Gets the character information for the given id

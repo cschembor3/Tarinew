@@ -140,6 +140,24 @@ function editStat(statValElems, tableSelector) {
 }
 
 /*
+ * Update player stats upon saving
+ */
+function updatePlayerStats(playerId, tableSelector, statValElems) {
+    const tableRows = $(tableSelector)[0].rows;
+    const stats = {
+        strength: tableRows[1].cells[1].textContent,
+        dexterity: tableRows[2].cells[1].textContent,
+        constitution: tableRows[3].cells[1].textContent,
+        intelligence: tableRows[4].cells[1].textContent,
+        wisdom: tableRows[5].cells[1].textContent,
+        charisma: tableRows[6].cells[1].textContent
+    };
+
+    updatePlayerStatsInDb(playerId, stats);
+    closeStatEditing(statValElems, tableSelector);
+}
+
+/*
  * Turns the stats table 'stat' column back to being un-editable
  */
 function closeStatEditing(statValElems, tableSelector) {
@@ -155,6 +173,23 @@ function closeStatEditing(statValElems, tableSelector) {
         const statValCell = rows[i].cells[1];
         statValCell.contentEditable = "false";
     }
+}
+
+/*
+ * Update a players stat values
+ */
+function updatePlayerStatsInDb(playerId, stats) {
+    const endpoint =  localEndpoint + playerId + '/stats';
+    $.post(endpoint, stats);
+}
+
+function put(url, data) {
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        data: data,
+        contentType: 'application/json'
+    });
 }
 
 function addElementToTable(table, ...tableEntries) {
