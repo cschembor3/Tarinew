@@ -2,6 +2,24 @@ const playersEndpoint = 'https://boiling-sea-30343.herokuapp.com/players/';
 const localEndpoint = 'http://localhost:12345/players/'
 const dndBeyondSpells = 'https://www.dndbeyond.com/spells/';
 
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
+
 /*
  * Get the character info, and populate the tables
  */
@@ -77,6 +95,12 @@ function addDescription(characterName, description) {
         localEndpoint + characterName + '/description',
         {
             characterDescription: characterDescription
+        })
+        .done(function() {
+            toastr["success"]("Description updated", "Update Successful!");
+        })
+        .fail(function() {
+            toastr["error"]("Please try again", "Update Failure...");
         });
 }
 
@@ -93,6 +117,12 @@ function addItem(characterName) {
         {
             itemName: itemName,
             itemDescription: itemDescription
+        })
+        .done(function() {
+            toastr["success"]("Item added", "Update Successful!");
+        })
+        .fail(function() {
+            toastr["error"]("Please try again", "Update Failure...");
         });
 
     closeItemsForm();
@@ -114,6 +144,12 @@ function addSpell(characterName) {
             spellName: spellName,
             spellDescription: spellDescription,
             spellLevel: spellLevel
+        })
+        .done(function() {
+            toastr["success"]("Spell added", "Update Successful!");
+        })
+        .fail(function() {
+            toastr["error"]("Please try again", "Update Failure...");
         });
 
     closeSpellsForm();
@@ -134,8 +170,8 @@ function editStat(statValElems, tableSelector) {
     const table = $(tableSelector);
     const rows = table[0].rows;
     for (i = 1; i < rows.length; i++) {
-    const statValCell = rows[i].cells[1];
-    statValCell.contentEditable = "true";
+        const statValCell = rows[i].cells[1];
+        statValCell.contentEditable = "true";
     }
 }
 
@@ -180,7 +216,14 @@ function closeStatEditing(statValElems, tableSelector) {
  */
 function updatePlayerStatsInDb(playerId, stats) {
     const endpoint =  localEndpoint + playerId + '/stats';
-    $.post(endpoint, stats);
+    
+    $.post(endpoint, stats)
+        .done(function() {
+            toastr["success"]("Player stats updated", "Update Successful!");
+        })
+        .fail(function() {
+            toastr["error"]("Please try again", "Update Failure...");
+        });
 }
 
 function put(url, data) {

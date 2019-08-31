@@ -9,6 +9,10 @@ table, th, td {
     max-width: 40%;
 }
 
+.btn {
+    margin-bottom: 10px;
+}
+
 .table {
     margin-bottom: 0px;
 }

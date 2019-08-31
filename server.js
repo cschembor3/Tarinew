@@ -133,7 +133,6 @@ app.post('/players/:playerId/stats', async function(req, res, next) {
 
   try {
     await pool.query(
-      
       'UPDATE character_info_table ' +
       'SET strength = ($1), ' + 
       'dexterity = ($2), ' +
