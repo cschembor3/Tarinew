@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="./CharacterInfo.js"></script>
     <script src="./DndFunctionality.js"></script>
     <script type="text/javascript">
@@ -19,6 +21,143 @@
     <h3>Class: Cleric</h3>
     <h3 id="level">Level: </h3>
     <textarea id="description" class="descriptionArea" rows="6" placeholder="Character description"></textarea>
+    <button class="btn addDesc" onclick="addDescription('Ivet', 'description')">Save</button>
+
+    <div class="character info">
+        <!-- Character sheet stats here -->
+        <div class="stats">
+            <h3>Stats</h3>
+            <table id="table-charSheet" class="table borded table-striped table-responsive" width="40%">
+                <thead>
+                    <tr>
+                        <th scope="col">Stat</th>
+                        <th scope="col">Val</th>
+                        <th scope="col">Mod</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Strength</td>
+                        <td id="strengthVal">
+                            <input type="number" class="edited-val" id="edited-strength-val"/>
+                        </td>
+                        <td id="strengthMod">
+                            <input type="number" class="edited-mod" id="edited-strength-mod"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dexterity</td>
+                        <td id="dexVal">
+                            <input type="number" class="edited-val" id="edited-dex-val"/>
+                        </td>
+                        <td id="dexMod">
+                            <input type="number" class="edited-mod" id="edited-dex-mod"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Constitution</td>
+                        <td id="constVal">
+                            <input type="number" class="edited-val" id="edited-const-val"/>
+                        </td>
+                        <td id="constMod">
+                            <input type="number" class="edited-mod" id="edited-const-mod"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Intelligence</td>
+                        <td id="intVal">
+                            <input type="number" class="edited-val" id="edited-int-val"/>
+                        </td>
+                        <td id="intMod">
+                            <input type="number" class="edited-mod" id="edited-int-mod"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wisdom</td>
+                        <td id="wisVal">
+                            <input type="number" class="edited-val" id="edited-wis-val"/>
+                        </td>
+                        <td id="wisMod">
+                            <input type="number" class="edited-mod" id="edited-wis-mod"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Charisma</td>
+                        <td id="charVal">
+                            <input type="number" class="edited-val" id="edited-char-val"/>
+                        </td>
+                        <td id="charMod">
+                            <input type="number" class="edited-mod" id="edited-char-mod"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-edit-btns">
+                <button class="btn edit" onclick="editStat('#table-charSheet tr td:nth-child(2)', '#table-charSheet')">Edit</button>
+                <button class="btn save" onclick="updatePlayerStats('Ivet', '#table-charSheet', '#table-charSheet tr td:nth-child(2)')">Save</button>
+            </div>
+        </div>
+
+        <div class="character goods">
+            <div>
+                <div class="spell info">
+                    <div>
+                        <h3>Spells</h3>
+                        <table id="spellsTable" class="table borded table-striped table-responsive">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Level</th>
+                            </tr>
+                        </table>
+                        <div id="spellInfoForm" class="form-popup">
+                            <form class="form-container" onsubmit="return addSpell('Ivet')">
+                                <label for="name">Spell Name</label>
+                                <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
+                                <label for="description">Spell Description</label>
+                                <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
+                                <label for="level">Spell Level</label>
+                                <input type="number" id="spellLevel" name="level" required>
+                                <button type="submit" class="btn">Add Spell</button>
+                                <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="item info">
+                    <div>
+                        <h3>Items</h3>
+                        <table id="itemsTable" class="table borded table-striped table-responsive">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </table>
+                        <div id="itemInfoForm" class="form-popup">
+                            <form class="form-container" onsubmit="return addItem('Ivet')">
+                                <label for="name">Item Name</label>
+                                <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
+                                <label for="description">Item Description</label>
+                                <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
+                                <button type="submit" class="btn">Add Item</button>
+                                <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="diceRollArea" class="dice-roll">
         <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 20)"><img src="./Icons/d20.png"></button>
         <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 12)"><img src="./Icons/d12.png"></button>
@@ -27,49 +166,7 @@
         <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 6)"><img src="./Icons/d6.png"></button>
         <button type="button" class="btn dice" data-toggle="popover" data-placement="top" onclick="roll(this, 4)"><img src="./Icons/d4.png"></button>
     </div>
-    <button class="btn addDesc" onclick="addDescription('Ivet', 'description')">Save</button>
-    
-    <h3>Spells</h3>
-    <table id="spellsTable">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Level</th>
-        </tr>
-    </table>
-    <button id="addSpell" class="btn addSpell" onclick="openSpellsForm()">Add spell</button>
-    <div id="spellInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addSpell('Ivet')">
-            <label for="name">Spell Name</label>
-            <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
-            <label for="description">Spell Description</label>
-            <input type="text" id="spellDescription" placeholder="Enter spell description" name="description" required>
-            <label for="level">Spell Level</label>
-            <input type="number" id="spellLevel" name="level" required>
-            <button type="submit" class="btn">Add Spell</button>
-            <button class="btn cancel" onclick="closeSpellsForm()">Cancel</button>
-        </form>
-    </div>
-
-    <h3>Items</h3>
-    <table id="itemsTable">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-    </table>
-    <button id="addItem" class="btn addItem" onclick="openItemsForm()">Add item</button>
-    <div id="itemInfoForm" class="form-popup">
-        <form class="form-container" onsubmit="return addItem('Ivet')">
-            <label for="name">Item Name</label>
-            <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
-            <label for="description">Item Description</label>
-            <input type="text" id="itemDescription" placeholder="Enter item description" name="description" required>
-            <button type="submit" class="btn">Add Item</button>
-            <button class="btn cancel" onclick="closeItemsForm()">Cancel</button>
-        </form>
-    </div>
-    
+   
     <div class="spinner"></div>
     <div class="page greyout"</div>
 </html>

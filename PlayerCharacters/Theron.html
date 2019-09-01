@@ -8,20 +8,20 @@
     <script src="./CharacterInfo.js"></script>
     <script src="./DndFunctionality.js"></script>
     <script type="text/javascript">
-        getCharacterInfo('Soveliss');
+        getCharacterInfo('Theron');
     </script>
     <head>
         <button type="button" class="btn homepageLink" onclick="location.href = '../index.html'">Home</button>
 
-        <h1>Soveliss</h1>
+        <h1>Theron</h1>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Characters.css"/>
     </head>
     <h3>Race: Elf</h3>
-    <h3>Class: Wizard</h3>
+    <h3>Class: Ranger</h3>
     <h3 id="level">Level: </h3>
     <textarea id="description" class="descriptionArea" rows="6" placeholder="Character description"></textarea>
-    <button class="btn addDesc" onclick="addDescription('Soveliss', 'description')">Save</button>
+    <button class="btn addDesc" onclick="addDescription('Theron', 'description')">Save</button>
 
     <div class="character info">
         <!-- Character sheet stats here -->
@@ -94,7 +94,7 @@
             </table>
             <div class="table-edit-btns">
                 <button class="btn edit" onclick="editStat('#table-charSheet tr td:nth-child(2)', '#table-charSheet')">Edit</button>
-                <button class="btn save" onclick="updatePlayerStats('Soveliss', '#table-charSheet', '#table-charSheet tr td:nth-child(2)')">Save</button>
+                <button class="btn save" onclick="updatePlayerStats('Theron', '#table-charSheet', '#table-charSheet tr td:nth-child(2)')">Save</button>
             </div>
         </div>
 
@@ -111,7 +111,7 @@
                             </tr>
                         </table>
                         <div id="spellInfoForm" class="form-popup">
-                            <form class="form-container" onsubmit="return addSpell('Soveliss')">
+                            <form class="form-container" onsubmit="return addSpell('Theron')">
                                 <label for="name">Spell Name</label>
                                 <input type="text" id="spellName" placeholder="Enter spell name" name="name" required>
                                 <label for="description">Spell Description</label>
@@ -139,7 +139,7 @@
                             </tr>
                         </table>
                         <div id="itemInfoForm" class="form-popup">
-                            <form class="form-container" onsubmit="return addItem('Soveliss')">
+                            <form class="form-container" onsubmit="return addItem('Theron')">
                                 <label for="name">Item Name</label>
                                 <input type="text" id="itemName" placeholder="Enter item name" name="name" required>
                                 <label for="description">Item Description</label>
