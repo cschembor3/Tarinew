@@ -26,7 +26,7 @@ toastr.options = {
 function getCharacterInfo(characterName) {
   $(".spinner").show();
   $(".page.greyout").fadeIn();
-  $.get(localEndpoint + characterName, function(data) {
+  $.get(playersEndpoint + characterName, function(data) {
     data = JSON.stringify(data);
     const playerObj = JSON.parse(data);
     document.getElementById("level").append(playerObj.characterInfo.level);
@@ -94,7 +94,7 @@ function populateCharacterStats(stats) {
  */
 function addDescription(characterName, description) {
   const characterDescription = $("#description").val();
-  $.post(localEndpoint + characterName + "/description", {
+  $.post(playersEndpoint + characterName + "/description", {
     characterDescription: characterDescription
   })
     .done(function() {
@@ -113,7 +113,7 @@ function addItem(characterName) {
   const itemName = $("#itemName").val();
   const itemDescription = $("#itemDescription").val();
   addElementToTable(table, itemName, itemDescription);
-  $.post(localEndpoint + characterName + "/items", {
+  $.post(playersEndpoint + characterName + "/items", {
     itemName: itemName,
     itemDescription: itemDescription
   })
@@ -137,7 +137,7 @@ function addSpell(characterName) {
   const spellDescription = $("#spellDescription").val();
   const spellLevel = $("#spellLevel").val();
   addElementToTable(table, spellName, spellDescription, spellLevel);
-  $.post(localEndpoint + characterName + "/spells", {
+  $.post(playersEndpoint + characterName + "/spells", {
     spellName: spellName,
     spellDescription: spellDescription,
     spellLevel: spellLevel
@@ -208,7 +208,7 @@ function closeStatEditing(statValElems, tableSelector) {
  * Update a players stat values
  */
 function updatePlayerStatsInDb(playerId, stats) {
-  const endpoint = localEndpoint + playerId + "/stats";
+  const endpoint = playersEndpoint + playerId + "/stats";
 
   $.post(endpoint, stats)
     .done(function() {
